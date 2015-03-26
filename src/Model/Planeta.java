@@ -31,9 +31,9 @@ public class Planeta extends Astro{
     @Override
     public void dibujar(){
         
-        TransformGroup outer_rot = createRotation(outer_rot_speed);
+        TransformGroup outer_rot = createRotationExt(outer_rot_speed);
         TransformGroup position = translate( new Vector3f(this.posX,this.posY,this.posZ) );
-        TransformGroup inner_rot = createRotation(inner_rot_speed);
+        TransformGroup inner_rot = createRotationInt(inner_rot_speed);
         
         outer_rot.addChild(position);
         position.addChild(inner_rot);

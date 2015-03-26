@@ -46,6 +46,10 @@ public class TheUniverse {
     // Se crea el universo. La parte de la vista
     SimpleUniverse universe = createUniverse (canvas);
     
+    // ----
+    GenericPick pick = new GenericPick( canvas );
+    root.addChild( pick );
+    
     // Se optimiza la escena y se cuelga del universo
     root.compile();
     universe.addBranchGraph(root);

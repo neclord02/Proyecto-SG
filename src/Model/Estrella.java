@@ -12,7 +12,7 @@ public class Estrella extends Astro{
     @Override
     public void dibujar(){
         
-        TransformGroup taux = createRotation(inner_rot_speed);
+        TransformGroup taux = createRotationInt(inner_rot_speed);
         taux.addChild(this.esfera);
         
         bg.addChild(taux);

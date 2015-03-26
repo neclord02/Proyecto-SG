@@ -187,6 +187,10 @@ class TheScene extends BranchGroup {
     
     /* ----- FIN NAVES ---- */
     
+    /* ----- INIT PICK ---- */
+    
+    
+    
     return bg;
   }
   

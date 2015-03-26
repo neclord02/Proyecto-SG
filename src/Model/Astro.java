@@ -15,7 +15,8 @@ public abstract class Astro {
     protected Appearance textura;
     protected String nombre;
     protected Sphere esfera;
-    private RotationInterpolator rotator;
+    private RotationInterpolator rotator_int;
+    private RotationInterpolator rotator_ext;
     protected int inner_rot_speed;
     protected int outer_rot_speed;
     
@@ -76,22 +77,36 @@ public abstract class Astro {
         
     }
     
-    public TransformGroup createRotation (int rot) {
+    public TransformGroup createRotationInt (int rot) {
         TransformGroup transform = new TransformGroup ();
         transform.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         Transform3D yAxis = new Transform3D ();
         Alpha value = new Alpha (-1, Alpha.INCREASING_ENABLE, 0, 0, 
                 rot, 0, 0, 0, 0, 0);
-        rotator = new RotationInterpolator (value, transform, yAxis,
+        rotator_int = new RotationInterpolator (value, transform, yAxis,
             0.0f, (float) Math.PI*2.0f);
-        rotator.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 1000.0));
-        rotator.setEnable(true);
-        transform.addChild(rotator);
+        rotator_int.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 1000.0));
+        rotator_int.setEnable(true);
+        transform.addChild( rotator_int );
+        return transform;
+    }
+    
+    public TransformGroup createRotationExt (int rot) {
+        TransformGroup transform = new TransformGroup ();
+        transform.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        Transform3D yAxis = new Transform3D ();
+        Alpha value = new Alpha (-1, Alpha.INCREASING_ENABLE, 0, 0, 
+                rot, 0, 0, 0, 0, 0);
+        rotator_ext = new RotationInterpolator (value, transform, yAxis,
+            0.0f, (float) Math.PI*2.0f);
+        rotator_ext.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 1000.0));
+        rotator_ext.setEnable(true);
+        transform.addChild(rotator_ext);
         return transform;
     }
     
     void setRotationOnOff (boolean onOff) {
-        rotator.setEnable(false);
+        rotator_int.setEnable(false);
     }
     
     public abstract void dibujar();
