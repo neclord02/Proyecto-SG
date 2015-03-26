@@ -17,14 +17,12 @@ import javax.vecmath.Vector3f;
 
 public class Nave {
     
-    private Vector3f vector;
     private String name;
     private BranchGroup bg;
     
-    Nave(String name, String path,Vector3f v){
+    Nave(String name, String path){
         this.bg = new BranchGroup();
         this.name = name;
-        this.vector = v;
         cargar_objeto(path);
     }
     
@@ -45,14 +43,14 @@ public class Nave {
             System.exit(1);
         }
         // Cargar traslacion inicial
-        TransformGroup posicion = translate( vector );
+        TransformGroup posicion = translate(  );
         posicion.addChild ( modelo.getSceneGroup() );
         // Añadir el nodo
         bg.addChild(posicion);
     }
     
     // Probablemente deberiamos hacer una clase "Transformaciones"
-    public TransformGroup translate(Vector3f vector){
+    public TransformGroup translate(){
         
         Transform3D transform3D = new Transform3D();
         TransformGroup transformGroup =new TransformGroup();
@@ -68,7 +66,7 @@ public class Nave {
         // Cuanto tiempo en MAX
         // Mismo hasta 0
         float [] alphas = { 0.0f,0.33f,0.66f,1.0f };
-        Point3f [] positions = { new Point3f(60.0f,60.0f,60.0f),new Point3f(80.0f,80.0f,60.0f),new Point3f(100.0f,60.0f,60.0f),new Point3f(60.0f,60.0f,60.0f) };
+        Point3f [] positions = { new Point3f(-20.0f,0.0f,20.0f),new Point3f(20.0f,00.0f,20.0f),new Point3f(0.0f,20.0f,20.0f),new Point3f(-20.0f,0.0f,20.0f) };
         
         
         PositionPathInterpolator path = new PositionPathInterpolator( alphaNave,transformGroup,transform3D,alphas,positions );

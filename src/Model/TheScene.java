@@ -167,7 +167,7 @@ class TheScene extends BranchGroup {
     
     /* ----- NAVES ---- */
     // Nave 1
-    Nave tie_fighter = new Nave("tie_fighter","models\\E-TIE-I\\E-TIE-I.obj",new Vector3f(0.0f,5.0f,30.0f));
+    Nave tie_fighter = new Nave("tie_fighter","models\\E-TIE-I\\E-TIE-I.obj" );
             /// TEST ESCALE DE LA NAVE
     Transform3D tg = new Transform3D();
     tg.setScale( 2.0f );
@@ -179,11 +179,11 @@ class TheScene extends BranchGroup {
     bg.addChild( tie_aux );
             // END TEST
     // Nave 2
-    Nave jet = new Nave("jet","models\\FA-22_Raptor\\FA-22_Raptor.obj",new Vector3f(4.0f,5.0f,30.0f));
-    bg.addChild( jet.getBranchGroup());
+    //Nave jet = new Nave("jet","models\\FA-22_Raptor\\FA-22_Raptor.obj" );
+    //bg.addChild( jet.getBranchGroup());
     // Nave 3
-    Nave space_ship = new Nave("space_ship","models\\naveEspacial\\naveEspacial.obj",new Vector3f(8.0f,5.0f,30.0f));
-    bg.addChild( space_ship.getBranchGroup());
+    //Nave space_ship = new Nave("space_ship","models\\naveEspacial\\naveEspacial.obj" ));
+    //bg.addChild( space_ship.getBranchGroup());
     
     /* ----- FIN NAVES ---- */
     
