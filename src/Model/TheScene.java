@@ -11,12 +11,9 @@ class TheScene extends BranchGroup {
   private final BranchGroup figure;
   /// El objeto que controla la rotación continua de la figura
   private RotationInterpolator rotator;
-  
-  private List<Astro> astros;
   private Nave nave;
   
   TheScene () { 
-    astros= new ArrayList<Astro>();
     // Se crea la rama con una figura
     figure = createScene ();
     // Se cuelga rotación de la escena
@@ -37,14 +34,12 @@ class TheScene extends BranchGroup {
       //// SOL
     Astro sol= new Estrella("sol", 27.0f, 0,0,0,100000,0);
     sol.dibujar();
-    astros.add(sol);
       //// TIERRA
     Astro luna = new Satelite("luna",0.5f,7,0,0,5000,5000);
     Astro tierra= new Planeta("tierra", 1.5f, 50,0,0,10000,30000);
     
     ((Planeta)tierra).addSatelite((Satelite)luna);
     tierra.dibujar();
-    astros.add(tierra);
        //// VENUS
     Astro venus= new Planeta("venus", 1.2f, 40,0,0,7000,7000);
     venus.dibujar();
@@ -154,15 +149,15 @@ class TheScene extends BranchGroup {
     bg.setCapability(Group.ALLOW_CHILDREN_EXTEND);
     bg.setCapability(Group.ALLOW_CHILDREN_WRITE);
     // Y le ponemos una figura
-    bg.addChild(sol.getBranchGroup());
-    bg.addChild(mercurio.getBranchGroup());
-    bg.addChild(venus.getBranchGroup());
-    bg.addChild(tierra.getBranchGroup());
-    bg.addChild(marte.getBranchGroup());
-    bg.addChild(jupiter.getBranchGroup());
-    bg.addChild(saturno.getBranchGroup());
-    bg.addChild(urano.getBranchGroup());
-    bg.addChild(neptuno.getBranchGroup());
+    bg.addChild(sol);
+    bg.addChild(mercurio);
+    bg.addChild(venus);
+    bg.addChild(tierra);
+    bg.addChild(marte);
+    bg.addChild(jupiter);
+    bg.addChild(saturno);
+    bg.addChild(urano);
+    bg.addChild(neptuno);
     /* ----- FIN PLANETAS ---- */ 
     
     /* ----- NAVES ---- */
@@ -193,11 +188,4 @@ class TheScene extends BranchGroup {
     
     return bg;
   }
-  
-    void setRotationOnOff (boolean onOff) {
-        for(Astro astro : astros){
-            astro.setRotationOnOff(onOff);
-        }
-    }
-  
 }

@@ -105,6 +105,6 @@ public class TheUniverse {
   }
   */
   public void setRotationOnOff (boolean onOff) {
-    scene.setRotationOnOff(onOff);
+    //scene.setRotationOnOff(onOff);
   }
 }

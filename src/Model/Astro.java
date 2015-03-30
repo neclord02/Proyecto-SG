@@ -8,10 +8,10 @@ import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3f;
 
-public abstract class Astro {
+public abstract class Astro extends BranchGroup{
     protected float posX, posY, posZ;
     protected float radio;
-    protected final BranchGroup bg;
+    protected BranchGroup bg;
     protected Appearance textura;
     protected String nombre;
     protected Sphere esfera;
@@ -23,7 +23,7 @@ public abstract class Astro {
     public Astro( String nombre, float radio, float x, float y, float z, int speed1,int speed2 ){
         
         this.nombre = nombre;
-        bg= new BranchGroup();
+        BranchGroup bg= new BranchGroup();
         bg.setCapability(BranchGroup.ALLOW_DETACH);
         this.textura = new Appearance();
         
@@ -60,10 +60,7 @@ public abstract class Astro {
         Primitive.ENABLE_APPEARANCE_MODIFY, 64, 
         this.textura);
         
-    }
-    
-    public BranchGroup getBranchGroup(){
-        return bg;
+        this.addChild(bg);
     }
     
     public TransformGroup translate(Vector3f vector){

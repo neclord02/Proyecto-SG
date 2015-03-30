@@ -45,7 +45,7 @@ public class Planeta extends Astro{
         
         for( Satelite i: satelites){ 
             i.dibujar();
-            position.addChild( i.getBranchGroup());    
+            position.addChild(i);    
         }
         
         bg.addChild(outer_rot);  
