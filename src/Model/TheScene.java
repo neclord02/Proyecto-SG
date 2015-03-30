@@ -33,20 +33,17 @@ class TheScene extends BranchGroup {
       
       //// SOL
     Astro sol= new Estrella("sol", 27.0f, 0,0,0,100000,0);
-    sol.dibujar();
+      
       //// TIERRA
-    Astro luna = new Satelite("luna",0.5f,7,0,0,5000,5000);
     Astro tierra= new Planeta("tierra", 1.5f, 50,0,0,10000,30000);
-    
+    Astro luna = new Satelite("luna",0.5f,7,0,0,5000,5000);
     ((Planeta)tierra).addSatelite((Satelite)luna);
-    tierra.dibujar();
+    
        //// VENUS
     Astro venus= new Planeta("venus", 1.2f, 40,0,0,7000,7000);
-    venus.dibujar();
     
        //// MERCURIO
     Astro mercurio= new Planeta("mercurio", 0.5f, 30,0,0,7000,3000);
-    mercurio.dibujar();
     
        //// MARTE
     Astro phobos = new Satelite("phobos",0.4f,7,0,0,8000,8000);
@@ -57,7 +54,6 @@ class TheScene extends BranchGroup {
     ((Planeta)marte).addSatelite((Satelite)phobos);
     ((Planeta)marte).addSatelite((Satelite)deimos);
     
-    marte.dibujar();
     
        //// JUPITER
     Astro io = new Satelite("io",0.53f,16,0,0,10000,5000);
@@ -72,7 +68,6 @@ class TheScene extends BranchGroup {
     ((Planeta)jupiter).addSatelite((Satelite)ganimedes);
     ((Planeta)jupiter).addSatelite((Satelite)calisto);
     
-    jupiter.dibujar();
        //// SATURNO
     
     /* Apariencias anillos */
@@ -118,8 +113,6 @@ class TheScene extends BranchGroup {
     
     /* fin anillos */
     
-    saturno.dibujar();
-    
        //// URANO
     Astro titania = new Satelite("titania",0.53f,17,0,0,8000,8000);
     Astro oberon = new Satelite("oberon",0.48f,20,0,0,8000,9000);
@@ -134,14 +127,11 @@ class TheScene extends BranchGroup {
     ((Planeta)urano).addSatelite((Satelite)ariel);
     ((Planeta)urano).addSatelite((Satelite)miranda);
     
-    urano.dibujar();
-    
        //// NEPTUNO
     Astro triton = new Satelite("triton",0.57f,9,0,0,8000,8000);
     
     Astro neptuno= new Planeta("neptuno", 4.5f, 220,0,0,14000,9000);
     ((Planeta)neptuno).addSatelite((Satelite)triton); 
-    neptuno.dibujar();
     
     // Se crea la rama desde la que cuelga todo
     BranchGroup bg = new BranchGroup ();
@@ -170,7 +160,7 @@ class TheScene extends BranchGroup {
     TransformGroup tie_aux = new TransformGroup();
     tie_aux.setTransform( tg );
     
-    tie_aux.addChild(tie_fighter.getBranchGroup());
+    tie_aux.addChild(tie_fighter);
     bg.addChild( tie_aux );
             // END TEST
     // Nave 2

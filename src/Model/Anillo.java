@@ -1,9 +1,6 @@
 
 package Model;
 
-import com.sun.j3d.utils.geometry.GeometryInfo;
-import com.sun.j3d.utils.geometry.NormalGenerator;
-import com.sun.j3d.utils.geometry.Stripifier;
 import java.util.*;
 import javax.media.j3d.*;
 import javax.vecmath.Point3f;

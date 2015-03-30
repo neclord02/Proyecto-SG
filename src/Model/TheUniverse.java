@@ -12,7 +12,6 @@ import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.View;
 import javax.vecmath.Point3d;
-import javax.vecmath.Point3f;
 import javax.vecmath.Vector3d;
 
 /**
@@ -21,9 +20,9 @@ import javax.vecmath.Vector3d;
  */
 public class TheUniverse {
   // Atributos de relación
-  private TheBackground background;
-  private TheLights lights;
-  private TheScene scene;
+  private final TheBackground background;
+  private final TheLights lights;
+  private final TheScene scene;
 
   // ******* Constructor
   

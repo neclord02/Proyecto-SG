@@ -13,15 +13,12 @@ import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3f;
-import javax.vecmath.Vector3f;
 
-public class Nave {
+public class Nave extends BranchGroup{
     
-    private String name;
-    private BranchGroup bg;
+    private final String name;
     
     Nave(String name, String path){
-        this.bg = new BranchGroup();
         this.name = name;
         cargar_objeto(path);
     }
@@ -32,13 +29,7 @@ public class Nave {
         ObjectFile archivo = new ObjectFile (ObjectFile.RESIZE | ObjectFile.STRIPIFY | ObjectFile.TRIANGULATE);
         try {
             modelo = archivo.load ( path );
-        } catch (FileNotFoundException e) {
-            System.err.println (e);
-            System.exit(1);
-        } catch (ParsingErrorException e) {
-            System.err.println (e);
-            System.exit(1);
-        } catch (IncorrectFormatException e) {
+        } catch (FileNotFoundException | ParsingErrorException | IncorrectFormatException e) {
             System.err.println (e);
             System.exit(1);
         }
@@ -46,7 +37,7 @@ public class Nave {
         TransformGroup posicion = translate(  );
         posicion.addChild ( modelo.getSceneGroup() );
         // Añadir el nodo
-        bg.addChild(posicion);
+        addChild(posicion);
     }
     
     // Probablemente deberiamos hacer una clase "Transformaciones"
@@ -75,10 +66,5 @@ public class Nave {
         path.setEnable(true);
         
         return transformGroup;
-    }
-    
-    public BranchGroup getBranchGroup(){
-        return bg;
-    }
-    
+    }    
 }
