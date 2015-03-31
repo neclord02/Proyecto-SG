@@ -44,7 +44,9 @@ public abstract class Astro extends BranchGroup{
         if(!this.nombre.equals("sol")){
             TransformGroup outer_rot = createRotation(outer_rot_speed,true);
             position = translate( new Vector3f(this.posX,this.posY,this.posZ) );
-            TransformGroup inner_rot = createRotation(inner_rot_speed, false);
+            TransformGroup inner_rot = new TransformGroup();
+            inner_rot.setCapability(Node.ENABLE_PICK_REPORTING);
+            inner_rot= createRotation(inner_rot_speed, false);
 
             outer_rot.addChild(position);
             position.addChild(inner_rot);
@@ -81,7 +83,7 @@ public abstract class Astro extends BranchGroup{
         setGrafo();
     }
     
-    public TransformGroup translate(Vector3f vector){       
+    private TransformGroup translate(Vector3f vector){       
         Transform3D transform3D = new Transform3D();
         transform3D.setTranslation(vector);
         TransformGroup transformGroup =new TransformGroup();
@@ -90,7 +92,7 @@ public abstract class Astro extends BranchGroup{
         return transformGroup;     
     }
     
-    public TransformGroup createRotation(int rot, boolean tipoRot){
+    private TransformGroup createRotation(int rot, boolean tipoRot){
         RotationInterpolator auxInterp;
         TransformGroup transform = new TransformGroup ();
         transform.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);

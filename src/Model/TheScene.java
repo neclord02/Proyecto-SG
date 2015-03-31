@@ -1,10 +1,8 @@
 package Model;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.media.j3d.*;
 import javax.vecmath.Color3f;
-import javax.vecmath.Vector3f;
+import javax.vecmath.Point3d;
 
 class TheScene extends BranchGroup {
   /// La rama de donde cuelga la figura que se cambia
@@ -12,12 +10,17 @@ class TheScene extends BranchGroup {
   /// El objeto que controla la rotación continua de la figura
   private RotationInterpolator rotator;
   private Nave nave;
+  private Canvas3D canvas;
   
   TheScene () { 
     // Se crea la rama con una figura
     figure = createScene ();
     // Se cuelga rotación de la escena
     this.addChild(figure);
+  }
+  
+  public void setcanvas(Canvas3D ca){
+      canvas= ca;
   }
 
   private BranchGroup createScene () {
@@ -173,8 +176,10 @@ class TheScene extends BranchGroup {
     /* ----- FIN NAVES ---- */
     
     /* ----- INIT PICK ---- */
+    GenericPick pick= new GenericPick(canvas);
+    pick.setStatus(bg);
     
-    
+    bg.addChild(pick);
     
     return bg;
   }

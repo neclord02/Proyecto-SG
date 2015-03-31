@@ -40,14 +40,17 @@ public class TheUniverse {
     
     // Se crea y se añade la escena al universo
     scene = new TheScene (); 
+    scene.setcanvas(canvas);
+    scene.setPickable(true);
     root.addChild(scene);
     
     // Se crea el universo. La parte de la vista
     SimpleUniverse universe = createUniverse (canvas);
     
     // ----
-    GenericPick pick = new GenericPick( canvas );
-    root.addChild( pick );
+    //GenericPick pick= new GenericPick(canvas);
+    //pick.setStatus(scene);
+    //scene.addChild(pick);
     
     // Se optimiza la escena y se cuelga del universo
     root.compile();
