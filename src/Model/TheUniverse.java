@@ -8,9 +8,12 @@ import com.sun.j3d.utils.universe.ViewingPlatform;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
+import javax.media.j3d.PhysicalBody;
+import javax.media.j3d.PhysicalEnvironment;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.View;
+import javax.media.j3d.ViewPlatform;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
@@ -18,15 +21,17 @@ import javax.vecmath.Vector3d;
  *
  * @author fvelasco
  */
-public class TheUniverse {
+public class TheUniverse extends BranchGroup{
   // Atributos de relación
   private final TheBackground background;
   private final TheLights lights;
   private final TheScene scene;
+  private final boolean tipo;
 
   // ******* Constructor
   
-  public TheUniverse (Canvas3D canvas) {
+  public TheUniverse (Canvas3D canvas, boolean tipo) {
+    this.tipo= tipo;
     // Todo cuelga de un nodo raiz
     BranchGroup root = new BranchGroup();
     
@@ -45,45 +50,52 @@ public class TheUniverse {
     root.addChild(scene);
     
     // Se crea el universo. La parte de la vista
-    SimpleUniverse universe = createUniverse (canvas);
+    //SimpleUniverse universe = createUniverse (canvas);
     
     // ----
     //GenericPick pick= new GenericPick(canvas);
     //pick.setStatus(scene);
     //scene.addChild(pick);
-    
+    this.addChild(root);
     // Se optimiza la escena y se cuelga del universo
-    root.compile();
-    universe.addBranchGraph(root);
+    //root.compile();
+    //universe.addBranchGraph(root);
   }
   
   // ******* Private
   
-  private SimpleUniverse createUniverse (Canvas3D canvas) {
+  private /*SimpleUniverse*/ void createUniverse (Canvas3D canvas) {
     // Se crea manualmente un ViewingPlatform para poder personalizarlo y asignárselo al universo
-    ViewingPlatform viewingPlatform = new ViewingPlatform();
+   /* ViewingPlatform viewingPlatform = new ViewingPlatform();
     
-    // La transformación de vista, dónde se está, a dónde se mira, Vup
-    TransformGroup viewTransformGroup = viewingPlatform.getViewPlatformTransform();
-    Transform3D viewTransform3D = new Transform3D();
-    viewTransform3D.lookAt (new Point3d (20,20,200), new Point3d (0,0,0), new Vector3d (0,1,0));
-    viewTransform3D.invert();
-    viewTransformGroup.setTransform (viewTransform3D);
+    if(tipo){
+        // La transformación de vista, dónde se está, a dónde se mira, Vup
+        TransformGroup viewTransformGroup = viewingPlatform.getViewPlatformTransform();
+        Transform3D viewTransform3D = new Transform3D();
+        viewTransform3D.lookAt (new Point3d (1,600,1), new Point3d (0,0,0), new Vector3d (0,1,0));
+        viewTransform3D.invert();
+        viewTransformGroup.setTransform (viewTransform3D);
 
-    // El comportamiento, para mover la camara con el raton
-    OrbitBehavior orbit = new OrbitBehavior(canvas, OrbitBehavior.REVERSE_ALL);
-    orbit.setSchedulingBounds(new BoundingSphere(new Point3d (0.0f, 0.0f, 0.0f), 1000.0f));
-    orbit.setZoomFactor (50.0f);
-    viewingPlatform.setViewPlatformBehavior(orbit);
+        // El comportamiento, para mover la camara con el raton
+       /* OrbitBehavior orbit = new OrbitBehavior(canvas, OrbitBehavior.REVERSE_ALL);
+        orbit.setSchedulingBounds(new BoundingSphere(new Point3d (0.0f, 0.0f, 0.0f), 1000.0f));
+        orbit.setZoomFactor (50.0f);
+        viewingPlatform.setViewPlatformBehavior(orbit);
+    }
+        // Se establece el angulo de vision a 45 grados y el plano de recorte trasero
+        Viewer viewer = new Viewer (canvas);
+        View view = viewer.getView();
+        view.setFieldOfView(Math.toRadians(45));
+        view.setBackClipDistance(150.0);
     
-    // Se establece el angulo de vision a 45 grados y el plano de recorte trasero
-    Viewer viewer = new Viewer (canvas);
-    View view = viewer.getView();
-    view.setFieldOfView(Math.toRadians(45));
-    view.setBackClipDistance(150.0);
-
     // Se construye y devuelve el Universo con los parametros definidos
-    return new SimpleUniverse (viewingPlatform, viewer);
+    return new SimpleUniverse (viewingPlatform, viewer); */
+    
+        
+        
+        //Conectamos el canvas y el viewPlatform
+        
+        
   }
   
   // ******* Public

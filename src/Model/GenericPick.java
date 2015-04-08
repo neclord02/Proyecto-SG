@@ -3,6 +3,7 @@ package Model;
 import com.sun.j3d.utils.pickfast.PickCanvas;
 import com.sun.j3d.utils.picking.PickResult;
 import java.awt.AWTEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Enumeration;
@@ -20,13 +21,13 @@ import javax.media.j3d.WakeupOr;
  * @author Vicente
  */
 public class GenericPick extends Behavior{
-    private WakeupCondition condition;
+    private WakeupCondition condition = new WakeupOnAWTEvent(MouseEvent.MOUSE_CLICKED );
     private PickCanvas pickCanvas;
     private Canvas3D canvas;
     
     public GenericPick (Canvas3D aCanvas) {
         canvas = aCanvas;
-        condition = new WakeupOnAWTEvent( MouseEvent.MOUSE_CLICKED );
+        //condition = new WakeupOnAWTEvent( MouseEvent.MOUSE_CLICKED );
        // status = AppStatus.Nothing;
     }
     
@@ -36,14 +37,12 @@ public class GenericPick extends Behavior{
         pickCanvas.setFlags(PickInfo.SCENEGRAPHPATH | 
                             PickInfo.CLOSEST_GEOM_INFO | 
                             PickInfo.CLOSEST_INTERSECTION_POINT);
-        //setEnable(true);
     }
     
     @Override
     public void initialize() {
-        //setEnable(false);
-                System.out.println("ok");
         wakeupOn(condition);
+        System.out.println("ok");
     }
 
     @Override

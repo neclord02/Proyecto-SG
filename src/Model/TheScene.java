@@ -24,7 +24,6 @@ class TheScene extends BranchGroup {
   }
 
   private BranchGroup createScene () {
-    
     /*
       1.- Iniciar -> creas los parametros del objeto
         1.1.- -> Si tiene lunas, añadirselas

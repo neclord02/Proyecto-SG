@@ -9,10 +9,12 @@ import javax.media.j3d.Alpha;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.PositionPathInterpolator;
+import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3f;
+import javax.vecmath.Vector3f;
 
 public class Nave extends BranchGroup{
     
@@ -44,12 +46,13 @@ public class Nave extends BranchGroup{
     public TransformGroup translate(){
         
         Transform3D transform3D = new Transform3D();
+        transform3D.set(new Vector3f(0.0f, 0.0f,0.0f));
         TransformGroup transformGroup =new TransformGroup();
         transformGroup.setTransform(transform3D);
         transformGroup.setCapability( TransformGroup.ALLOW_TRANSFORM_READ );
         transformGroup.setCapability( TransformGroup.ALLOW_TRANSFORM_WRITE );
         
-        Alpha alphaNave = new Alpha( -1, Alpha.INCREASING_ENABLE, 0,0,6000,0,0,0,0,0 );
+       /* Alpha alphaNave = new Alpha( -1, Alpha.INCREASING_ENABLE, 0,0,6000,0,0,0,0,0 );
         // Nada
         // Reposo
         // Lineal
@@ -64,6 +67,16 @@ public class Nave extends BranchGroup{
         transformGroup.addChild(path);
         path.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 1000.0));
         path.setEnable(true);
+        */
+        //Añadimos la animación de la rotacion de la nave
+        Alpha alphaRotacion= new Alpha(-1, Alpha.INCREASING_ENABLE, 0, 0, 6000, 24000, 6000, 0, 0, 0);
+        RotationInterpolator interpoladorRotacion= new RotationInterpolator(alphaRotacion, transformGroup);
+        
+        interpoladorRotacion.setMinimumAngle(0.0f);
+        interpoladorRotacion.setMaximumAngle((float) -Math.PI*2.0f);
+        interpoladorRotacion.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 1000.0));
+        
+        transformGroup.addChild(interpoladorRotacion);
         
         return transformGroup;
     }    
