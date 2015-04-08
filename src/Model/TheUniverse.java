@@ -52,7 +52,7 @@ public class TheUniverse extends BranchGroup{
     
     // ----
     GenericPick pick= new GenericPick(canvas, canvas2);
-    pick.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 500.0));
+    pick.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 1000.0));
     pick.setStatus(scene);
     scene.addChild(pick);
     

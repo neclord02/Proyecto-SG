@@ -65,34 +65,30 @@ public class GenericPick extends Behavior{
         PickInfo pi = pickCanvas1.pickClosest();
         PickInfo pi2 = pickCanvas2.pickClosest();
         
-        if(pi2!=null){
-        TransformGroup aux2= (TransformGroup) pi2.getSceneGraphPath().getNode(0);
-        RotationInterpolator rot2= (RotationInterpolator)aux2.getChild(0);
-       // if(pi.getNode().)
-        
-            if(!aux2.isLive() && pi!=null){
-                TransformGroup aux= (TransformGroup) pi.getSceneGraphPath().getNode(0);
-                RotationInterpolator rot= (RotationInterpolator)aux.getChild(0);
+        if(pi!=null){  
+            TransformGroup aux= (TransformGroup) pi.getSceneGraphPath().getNode(0);
+            RotationInterpolator rot= (RotationInterpolator)aux.getChild(0);
 
-                if(rot.getEnable()){
-                    rot.setEnable(false);
-                    System.out.println("OFF");
-                }
-                else if(!rot.getEnable()){
-                    rot.setEnable(true);
-                    System.out.println("ON");
-                }
+            if(rot.getEnable()){
+                rot.setEnable(false);
             }
-
+            else if(!rot.getEnable()){
+                rot.setEnable(true);
+            }           
+        }
+        else if(pi2!=null){
+            TransformGroup aux2= (TransformGroup) pi2.getSceneGraphPath().getNode(0);
+            RotationInterpolator rot2= (RotationInterpolator)aux2.getChild(0);
+            
             if(rot2.getEnable()){
                 rot2.setEnable(false);
-                System.out.println("OFF");
             }
             else if(!rot2.getEnable()){
                 rot2.setEnable(true);
-                System.out.println("ON");
             }
-        wakeupOn( condition );
         }
+        
+        
+         wakeupOn( condition );
     }
 }
