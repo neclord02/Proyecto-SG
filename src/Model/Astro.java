@@ -44,10 +44,10 @@ public abstract class Astro extends BranchGroup{
         if(!this.nombre.equals("sol")){
             TransformGroup outer_rot = createRotation(outer_rot_speed,true);
             position = translate( new Vector3f(this.posX,this.posY,this.posZ) );
-            TransformGroup inner_rot = new TransformGroup();    
+            TransformGroup inner_rot = new TransformGroup();
+            position.setCapability(Node.ENABLE_PICK_REPORTING);
             inner_rot= createRotation(inner_rot_speed, false);
-            inner_rot.setCapability(Node.ENABLE_PICK_REPORTING);
-            
+
             outer_rot.addChild(position);
             position.addChild(inner_rot);
             inner_rot.addChild(this.esfera);
@@ -55,7 +55,6 @@ public abstract class Astro extends BranchGroup{
         }
         else{
             TransformGroup taux = createRotation(inner_rot_speed, false);
-            taux.setCapability(Node.ENABLE_PICK_REPORTING);
             taux.addChild(this.esfera);
             addChild(taux);
         }
