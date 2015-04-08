@@ -53,9 +53,11 @@ public class TheUniverse extends BranchGroup{
     //SimpleUniverse universe = createUniverse (canvas);
     
     // ----
-    //GenericPick pick= new GenericPick(canvas);
-    //pick.setStatus(scene);
-    //scene.addChild(pick);
+    GenericPick pick= new GenericPick(canvas);
+    pick.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 1000.0));
+    pick.setStatus(scene);
+    scene.addChild(pick);
+    
     this.addChild(root);
     // Se optimiza la escena y se cuelga del universo
     //root.compile();

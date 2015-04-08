@@ -11,6 +11,8 @@ import javax.media.j3d.Behavior;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.PickInfo;
+import javax.media.j3d.RotationInterpolator;
+import javax.media.j3d.TransformGroup;
 import javax.media.j3d.WakeupCondition;
 import javax.media.j3d.WakeupCriterion;
 import javax.media.j3d.WakeupOnAWTEvent;
@@ -55,7 +57,12 @@ public class GenericPick extends Behavior{
         
         PickInfo pi = pickCanvas.pickClosest();
         
-        System.out.println("ok2");
+        TransformGroup aux= (TransformGroup) pi.getSceneGraphPath().getNode(0);
+        RotationInterpolator aux2= (RotationInterpolator) aux.getChild(0);
+        aux2.setEnable(false);
+        
+        //.getChild()
+        
         //setEnable(false);
         wakeupOn( condition );
         

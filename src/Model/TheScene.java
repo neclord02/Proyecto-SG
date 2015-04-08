@@ -175,11 +175,11 @@ class TheScene extends BranchGroup {
     /* ----- FIN NAVES ---- */
     
     /* ----- INIT PICK ---- */
-    GenericPick pick= new GenericPick(canvas);
+   /* GenericPick pick= new GenericPick(canvas);
     pick.setStatus(bg);
     
     bg.addChild(pick);
-    
+    */
     return bg;
   }
 }
