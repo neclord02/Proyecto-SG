@@ -44,12 +44,10 @@ public class GenericPick extends Behavior{
     @Override
     public void initialize() {
         wakeupOn(condition);
-        System.out.println("ok");
     }
 
     @Override
     public void processStimulus(Enumeration cond) {
-        System.out.println("ok2");
         WakeupOnAWTEvent c = (WakeupOnAWTEvent) cond.nextElement();
         AWTEvent[] e = c.getAWTEvent();
         MouseEvent mouse = (MouseEvent) e[0];
@@ -57,15 +55,20 @@ public class GenericPick extends Behavior{
         
         PickInfo pi = pickCanvas.pickClosest();
         
+       // if(pi.getNode().)
         TransformGroup aux= (TransformGroup) pi.getSceneGraphPath().getNode(0);
-        RotationInterpolator aux2= (RotationInterpolator) aux.getChild(0);
-        aux2.setEnable(false);
+        TransformGroup aux2= (TransformGroup)aux.getChild(0);
+        RotationInterpolator rot= (RotationInterpolator)aux2.getChild(0);
         
-        //.getChild()
+        if(rot.getEnable()){
+            rot.setEnable(false);
+            System.out.println("OFF");
+        }
+        else{
+            rot.setEnable(true);
+            System.out.println("ON");
+        }
         
-        //setEnable(false);
         wakeupOn( condition );
-        
     }
-    
 }

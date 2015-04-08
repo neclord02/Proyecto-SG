@@ -45,7 +45,7 @@ public abstract class Astro extends BranchGroup{
             TransformGroup outer_rot = createRotation(outer_rot_speed,true);
             position = translate( new Vector3f(this.posX,this.posY,this.posZ) );
             TransformGroup inner_rot = new TransformGroup();
-            inner_rot.setCapability(Node.ENABLE_PICK_REPORTING);
+            position.setCapability(Node.ENABLE_PICK_REPORTING);
             inner_rot= createRotation(inner_rot_speed, false);
 
             outer_rot.addChild(position);
