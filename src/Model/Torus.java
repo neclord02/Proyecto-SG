@@ -1,20 +1,19 @@
-
 package Model;
 
-import java.util.*;
-import javax.media.j3d.*;
+import java.util.ArrayList;
+import javax.media.j3d.Appearance;
+import javax.media.j3d.GeometryArray;
+import javax.media.j3d.IndexedGeometryArray;
+import javax.media.j3d.IndexedQuadArray;
+import javax.media.j3d.Shape3D;
+import javax.media.j3d.Transform3D;
 import javax.vecmath.Point3f;
 import javax.vecmath.Vector3f;
 
-public class Anillo extends Shape3D{
+public class Torus extends Shape3D{
     
-    private final BranchGroup bg;
-    private Anillo anillo2;
+    public Torus(float rad1, float rad2, int res1, int res2, Appearance app){
     
-    public Anillo( float rad1, float rad2, int res1, int res2, Appearance app ){
-        
-        this.bg = new BranchGroup();
-        
         ArrayList<Point3f> vertex = new ArrayList<>();
         ArrayList<Integer> index = new ArrayList<>();
         
@@ -79,21 +78,12 @@ public class Anillo extends Shape3D{
         
         }
         // Tal y como en el pdf
-        IndexedGeometryArray quads = new IndexedQuadArray( vertex.size(),GeometryArray.COORDINATES | GeometryArray.NORMALS ,index.size());
+        IndexedGeometryArray quads = new IndexedQuadArray( vertex.size(),GeometryArray.COORDINATES ,index.size());
         quads.setCoordinates(0, vertex.toArray(coordenadas));
         quads.setCoordinateIndices(0,indices );
         
         this.setGeometry( quads );
         this.setAppearance(app);
         
-        this.bg.addChild(this);
-        
     }
-    
-    public BranchGroup getBranchGroup(){
-    
-        return this.bg;
-    
-    }
-    
 }
