@@ -7,15 +7,8 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Locale;
-import javax.media.j3d.PhysicalBody;
-import javax.media.j3d.PhysicalEnvironment;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TransformGroup;
-import javax.media.j3d.View;
-import javax.media.j3d.ViewPlatform;
 import javax.media.j3d.VirtualUniverse;
-import javax.vecmath.Point3d;
-import javax.vecmath.Vector3d;
+
 
 public class SGP1 {
 
@@ -37,7 +30,7 @@ public class SGP1 {
         vistas.addChild(perspectiva);
         locale.addBranchGraph(vistas);
 
-        locale.addBranchGraph(new TheUniverse(canvas,false));
+        locale.addBranchGraph(new TheUniverse(canvas, canvas2,false));
         // ---------------------------------------------------------------------------------
         Visualization visualization = new Visualization (false, canvas);
         Visualization visualization2 = new Visualization (false, canvas2);

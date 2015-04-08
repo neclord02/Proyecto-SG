@@ -30,7 +30,7 @@ public class TheUniverse extends BranchGroup{
 
   // ******* Constructor
   
-  public TheUniverse (Canvas3D canvas, boolean tipo) {
+  public TheUniverse (Canvas3D canvas, Canvas3D canvas2, boolean tipo) {
     this.tipo= tipo;
     // Todo cuelga de un nodo raiz
     BranchGroup root = new BranchGroup();
@@ -52,10 +52,11 @@ public class TheUniverse extends BranchGroup{
     // Se crea el universo. La parte de la vista
     //SimpleUniverse universe = createUniverse (canvas);
     
-    // ----
-    GenericPick pick= new GenericPick(canvas);
+    // ---- Colgamos el pick de las dos ventanas
+    GenericPick pick= new GenericPick(canvas2);
     pick.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 1000.0));
     pick.setStatus(scene);
+    
     scene.addChild(pick);
     
     this.addChild(root);
