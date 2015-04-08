@@ -23,20 +23,27 @@ import javax.media.j3d.WakeupOr;
  * @author Vicente
  */
 public class GenericPick extends Behavior{
-    private WakeupCondition condition = new WakeupOnAWTEvent(MouseEvent.MOUSE_CLICKED );
-    private PickCanvas pickCanvas;
-    private Canvas3D canvas;
+    private final WakeupCondition condition = new WakeupOnAWTEvent(MouseEvent.MOUSE_CLICKED );
+    private PickCanvas pickCanvas1, pickCanvas2;
+    private final Canvas3D canvas, canvas2;
     
-    public GenericPick (Canvas3D aCanvas) {
+    public GenericPick (Canvas3D aCanvas, Canvas3D aCanvas2) {
         canvas = aCanvas;
+        canvas2= aCanvas2;
         //condition = new WakeupOnAWTEvent( MouseEvent.MOUSE_CLICKED );
        // status = AppStatus.Nothing;
     }
     
     public void setStatus(BranchGroup bg){
-        pickCanvas= new PickCanvas(canvas, bg);
-        pickCanvas.setMode(PickInfo.PICK_GEOMETRY);
-        pickCanvas.setFlags(PickInfo.SCENEGRAPHPATH | 
+        pickCanvas1= new PickCanvas(canvas, bg);
+        pickCanvas1.setMode(PickInfo.PICK_GEOMETRY);
+        pickCanvas1.setFlags(PickInfo.SCENEGRAPHPATH | 
+                            PickInfo.CLOSEST_GEOM_INFO | 
+                            PickInfo.CLOSEST_INTERSECTION_POINT);
+        
+        pickCanvas2= new PickCanvas(canvas2, bg);
+        pickCanvas2.setMode(PickInfo.PICK_GEOMETRY);
+        pickCanvas2.setFlags(PickInfo.SCENEGRAPHPATH | 
                             PickInfo.CLOSEST_GEOM_INFO | 
                             PickInfo.CLOSEST_INTERSECTION_POINT);
     }
@@ -51,24 +58,41 @@ public class GenericPick extends Behavior{
         WakeupOnAWTEvent c = (WakeupOnAWTEvent) cond.nextElement();
         AWTEvent[] e = c.getAWTEvent();
         MouseEvent mouse = (MouseEvent) e[0];
-        pickCanvas.setShapeLocation( mouse );
+        pickCanvas1.setShapeLocation( mouse );
+        pickCanvas2.setShapeLocation( mouse );
         
-        PickInfo pi = pickCanvas.pickClosest();
         
+        PickInfo pi = pickCanvas1.pickClosest();
+        PickInfo pi2 = pickCanvas2.pickClosest();
+        
+        if(pi2!=null){
+        TransformGroup aux2= (TransformGroup) pi2.getSceneGraphPath().getNode(0);
+        RotationInterpolator rot2= (RotationInterpolator)aux2.getChild(0);
        // if(pi.getNode().)
-        TransformGroup aux= (TransformGroup) pi.getSceneGraphPath().getNode(0);
-        TransformGroup aux2= (TransformGroup)aux.getChild(0);
-        RotationInterpolator rot= (RotationInterpolator)aux2.getChild(0);
         
-        if(rot.getEnable()){
-            rot.setEnable(false);
-            System.out.println("OFF");
-        }
-        else{
-            rot.setEnable(true);
-            System.out.println("ON");
-        }
-        
+            if(!aux2.isLive() && pi!=null){
+                TransformGroup aux= (TransformGroup) pi.getSceneGraphPath().getNode(0);
+                RotationInterpolator rot= (RotationInterpolator)aux.getChild(0);
+
+                if(rot.getEnable()){
+                    rot.setEnable(false);
+                    System.out.println("OFF");
+                }
+                else if(!rot.getEnable()){
+                    rot.setEnable(true);
+                    System.out.println("ON");
+                }
+            }
+
+            if(rot2.getEnable()){
+                rot2.setEnable(false);
+                System.out.println("OFF");
+            }
+            else if(!rot2.getEnable()){
+                rot2.setEnable(true);
+                System.out.println("ON");
+            }
         wakeupOn( condition );
+        }
     }
 }

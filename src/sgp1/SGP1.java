@@ -37,7 +37,7 @@ public class SGP1 {
         vistas.addChild(perspectiva);
         locale.addBranchGraph(vistas);
 
-        locale.addBranchGraph(new TheUniverse(canvas,false));
+        locale.addBranchGraph(new TheUniverse(canvas,canvas2));
         // ---------------------------------------------------------------------------------
         Visualization visualization = new Visualization (false, canvas);
         Visualization visualization2 = new Visualization (false, canvas2);
