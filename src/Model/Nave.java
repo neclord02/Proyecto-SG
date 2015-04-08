@@ -69,11 +69,11 @@ public class Nave extends BranchGroup{
         path.setEnable(true);
         */
         //Añadimos la animación de la rotacion de la nave
-        Alpha alphaRotacion= new Alpha(-1, Alpha.INCREASING_ENABLE, 0, 0, 6000, 24000, 6000, 0, 0, 0);
+        Alpha alphaRotacion= new Alpha(-1, Alpha.INCREASING_ENABLE, 0, 0, 1000, 6000, 6000, 0, 0, 0);
         RotationInterpolator interpoladorRotacion= new RotationInterpolator(alphaRotacion, transformGroup);
         
         interpoladorRotacion.setMinimumAngle(0.0f);
-        interpoladorRotacion.setMaximumAngle((float) -Math.PI*2.0f);
+        interpoladorRotacion.setMaximumAngle((float) -Math.PI/2.0f);
         interpoladorRotacion.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 1000.0));
         
         transformGroup.addChild(interpoladorRotacion);

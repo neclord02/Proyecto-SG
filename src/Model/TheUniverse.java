@@ -64,11 +64,10 @@ public class TheUniverse extends BranchGroup{
   
   // ******* Private
   
-  private /*SimpleUniverse*/ void createUniverse (Canvas3D canvas) {
+  private SimpleUniverse createUniverse (Canvas3D canvas, Canvas3D canvas2) {
     // Se crea manualmente un ViewingPlatform para poder personalizarlo y asignárselo al universo
-   /* ViewingPlatform viewingPlatform = new ViewingPlatform();
+    ViewingPlatform viewingPlatform = new ViewingPlatform();
     
-    if(tipo){
         // La transformación de vista, dónde se está, a dónde se mira, Vup
         TransformGroup viewTransformGroup = viewingPlatform.getViewPlatformTransform();
         Transform3D viewTransform3D = new Transform3D();
@@ -80,8 +79,8 @@ public class TheUniverse extends BranchGroup{
        /* OrbitBehavior orbit = new OrbitBehavior(canvas, OrbitBehavior.REVERSE_ALL);
         orbit.setSchedulingBounds(new BoundingSphere(new Point3d (0.0f, 0.0f, 0.0f), 1000.0f));
         orbit.setZoomFactor (50.0f);
-        viewingPlatform.setViewPlatformBehavior(orbit);
-    }
+        viewingPlatform.setViewPlatformBehavior(orbit);*/
+ 
         // Se establece el angulo de vision a 45 grados y el plano de recorte trasero
         Viewer viewer = new Viewer (canvas);
         View view = viewer.getView();
@@ -89,7 +88,7 @@ public class TheUniverse extends BranchGroup{
         view.setBackClipDistance(150.0);
     
     // Se construye y devuelve el Universo con los parametros definidos
-    return new SimpleUniverse (viewingPlatform, viewer); */
+    return new SimpleUniverse (viewingPlatform, viewer); 
     
         
         
