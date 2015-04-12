@@ -115,5 +115,9 @@ public abstract class Astro extends BranchGroup{
         }
         
         return transform;
-    }    
+    }
+    
+    public void addCamara(Camara cam){
+        position.addChild(cam);
+    }
 }

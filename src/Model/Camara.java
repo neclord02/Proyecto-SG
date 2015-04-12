@@ -25,8 +25,10 @@ public class Camara extends BranchGroup{
     private TransformGroup transformgroup;
     private View view;
     private ViewPlatform vp;
+    private Canvas3D canvas;
     
     public Camara(Canvas3D canvas, String tipo){
+        this.canvas= canvas;
         transform3d= new Transform3D();
         view= new View();
         vp= new ViewPlatform();
@@ -65,5 +67,41 @@ public class Camara extends BranchGroup{
                 break;
         }
         this.addChild(transformgroup);
+    }
+    
+    public Camara(String tipo){
+        transform3d= new Transform3D();
+        view= new View();
+        vp= new ViewPlatform();
+        
+        switch(tipo){
+            case "luna":
+                transform3d.lookAt(new Point3d(10,10,10), new Point3d(0,0,0), new Vector3d(0,1,0)); //new Point3d(120,60,120)
+                transform3d.invert();
+                transformgroup= new TransformGroup(transform3d);
+                transformgroup.addChild(vp);
+                view.setPhysicalBody(new PhysicalBody());
+                view.setPhysicalEnvironment(new PhysicalEnvironment());
+                view.setProjectionPolicy(View.PERSPECTIVE_PROJECTION);
+                view.setFieldOfView(Math.toRadians(45));
+                view.setFrontClipDistance(0.1);
+                view.setBackClipDistance(90);
+
+                view.attachViewPlatform(vp);
+                break;
+        }
+    }
+    
+    public void eliminarCanvas(){
+        view.removeCanvas3D(this.canvas);
+    }
+    
+    public void addCanvas(Canvas3D canvas){
+        this.canvas= canvas;
+        view.addCanvas3D(this.canvas);
+    }
+    
+    public ViewPlatform getViewPlatform(){
+        return vp;
     }
 }

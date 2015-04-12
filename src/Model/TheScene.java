@@ -11,9 +11,11 @@ class TheScene extends BranchGroup {
   private RotationInterpolator rotator;
   private Nave nave;
   private Canvas3D canvas;
+  private Camara camLuna, camNave;
   
-  TheScene () { 
+  TheScene (Canvas3D canvas) { 
     // Se crea la rama con una figura
+    this.canvas= canvas;
     figure = createScene ();
     // Se cuelga rotación de la escena
     this.addChild(figure);
@@ -35,10 +37,13 @@ class TheScene extends BranchGroup {
       
       //// SOL
     Astro sol= new Estrella("sol", 27.0f, 0,0,0,100000,0);
-      
       //// TIERRA
     Astro tierra= new Planeta("tierra", 1.5f, 50,0,0,10000,30000);
+    
     Astro luna = new Satelite("luna",0.5f,7,0,0,5000,5000);
+    camLuna= new Camara("luna");
+    //cam.addCanvas(this.canvas);
+    luna.addCamara(camLuna);
     ((Planeta)tierra).addSatelite((Satelite)luna);
     
        //// VENUS
@@ -182,4 +187,12 @@ class TheScene extends BranchGroup {
     */
     return bg;
   }
+  
+  public Camara getCamaraLuna(){
+      return camLuna;
+  }
+   public Camara getCamaraNave(){
+      return camNave;
+  }
+  
 }

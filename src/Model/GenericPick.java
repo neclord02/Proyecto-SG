@@ -82,12 +82,13 @@ public class GenericPick extends Behavior{
             
             if(rot2.getEnable()){
                 rot2.setEnable(false);
+                System.out.println("OFF");
             }
             else if(!rot2.getEnable()){
                 rot2.setEnable(true);
+                System.out.println("ON");
             }
         }
-        
         
          wakeupOn( condition );
     }

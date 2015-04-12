@@ -9,17 +9,20 @@ import javax.media.j3d.Alpha;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.PositionPathInterpolator;
+import javax.media.j3d.RotPosPathInterpolator;
 import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
+import javax.vecmath.AxisAngle4f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3f;
+import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 public class Nave extends BranchGroup{
     
     private final String name;
-    
+    private Scene modelo;
     Nave(String name, String path){
         this.name = name;
         cargar_objeto(path);
@@ -27,7 +30,7 @@ public class Nave extends BranchGroup{
     
     public void cargar_objeto( String path ){
         // Cargar objeto y texturas
-        Scene modelo = null; 
+        modelo = null; 
         ObjectFile archivo = new ObjectFile (ObjectFile.RESIZE | ObjectFile.STRIPIFY | ObjectFile.TRIANGULATE);
         try {
             modelo = archivo.load ( path );
@@ -36,15 +39,16 @@ public class Nave extends BranchGroup{
             System.exit(1);
         }
         // Cargar traslacion inicial
-        TransformGroup posicion = translate(  );
-        posicion.addChild ( modelo.getSceneGroup() );
+        //TransformGroup posicion = translate(  );
+        //posicion.addChild ( modelo.getSceneGroup() );
         // Añadir el nodo
-        addChild(posicion);
+        //addChild(posicion);
+        translate();
     }
     
     // Probablemente deberiamos hacer una clase "Transformaciones"
-    public TransformGroup translate(){
-        
+    public void translate(){
+        /*
         Transform3D transform3D = new Transform3D();
         transform3D.set(new Vector3f(0.0f, 0.0f,0.0f));
         TransformGroup transformGroup =new TransformGroup();
@@ -52,7 +56,7 @@ public class Nave extends BranchGroup{
         transformGroup.setCapability( TransformGroup.ALLOW_TRANSFORM_READ );
         transformGroup.setCapability( TransformGroup.ALLOW_TRANSFORM_WRITE );
         
-       /* Alpha alphaNave = new Alpha( -1, Alpha.INCREASING_ENABLE, 0,0,6000,0,0,0,0,0 );
+        Alpha alphaNave = new Alpha( -1, Alpha.INCREASING_ENABLE, 0,0,6000,0,0,0,0,0 );
         // Nada
         // Reposo
         // Lineal
@@ -61,23 +65,58 @@ public class Nave extends BranchGroup{
         // Mismo hasta 0
         float [] alphas = { 0.0f,0.33f,0.66f,1.0f };
         Point3f [] positions = { new Point3f(-20.0f,0.0f,20.0f),new Point3f(20.0f,00.0f,20.0f),new Point3f(0.0f,20.0f,20.0f),new Point3f(-20.0f,0.0f,20.0f) };
+        Quat4f [] rotations= new Quat4f[4];
+        for(int i=0; i<4; i++){
+            rotations[i]= new Quat4f();
+            rotations[i].set(new AxisAngle4f(0.0f, 0.0f, 1.0f, (float)Math.toRadians(90)));
+        }
         
-        
-        PositionPathInterpolator path = new PositionPathInterpolator( alphaNave,transformGroup,transform3D,alphas,positions );
+        RotPosPathInterpolator path = new RotPosPathInterpolator( alphaNave,transformGroup,transform3D,alphas,rotations, positions );
         transformGroup.addChild(path);
         path.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 1000.0));
         path.setEnable(true);
-        */
-        //Añadimos la animación de la rotacion de la nave
-        Alpha alphaRotacion= new Alpha(-1, Alpha.INCREASING_ENABLE, 0, 0, 1000, 6000, 6000, 0, 0, 0);
-        RotationInterpolator interpoladorRotacion= new RotationInterpolator(alphaRotacion, transformGroup);
         
-        interpoladorRotacion.setMinimumAngle(0.0f);
-        interpoladorRotacion.setMaximumAngle((float) -Math.PI/2.0f);
-        interpoladorRotacion.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 1000.0));
+        return transformGroup;*/
+        //BranchGroup objRoot = new BranchGroup();
+
+        Alpha alphaNave = new Alpha( -1, Alpha.INCREASING_ENABLE, 0,0,6000,0,0,0,0,0 );//new Alpha( -1,10000 );
+        TransformGroup target = new TransformGroup();
+        Transform3D axisOfRotPos = new Transform3D();
+        float[] alphas = {0.0f, 0.25f, 0.50f, 0.75f, 1.0f};
+        Quat4f[] quats = new Quat4f[5];
+        Point3f[] positions = new Point3f[5];
+
+        target.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+
+        //AxisAngle4f axis = new AxisAngle4f(0.0f,(float)Math.toRadians(90),0.0f,0.0f);
+        //axisOfRotPos.set(axis);
+
+        quats[0] = new Quat4f(0.0f, 1.0f, 0.0f, 0.0f);
+        quats[1] = new Quat4f(0.0f, 1.0f, 0.0f, 0.0f);
+        quats[2] = new Quat4f(0.0f, 1.0f, 0.0f, 0.0f);
+        quats[3] = new Quat4f(0.0f, 0.0f, 0.0f, 0.0f);
+        quats[4] = quats[0];
+
+        positions[0]= new Point3f( -20.0f,  0.0f, 20.0f);
+        positions[1]= new Point3f( -20.0f, 0.0f, -20.0f);
+        positions[2]= new Point3f( 20.0f,  0.0f, -20.0f);
+        positions[3]= new Point3f( 20.0f,  0.0f, 20.0f);
+        positions[4]= positions[0];
+
+
+        RotPosPathInterpolator rotPosPath = new RotPosPathInterpolator(
+                alphaNave, target, axisOfRotPos, alphas, quats, positions);
+        rotPosPath.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 1000.0));
+
+
+        addChild(target);
+        addChild(rotPosPath);
         
-        transformGroup.addChild(interpoladorRotacion);
+        Transform3D taux= new Transform3D();
+        taux.setScale(2.0);
+        TransformGroup t= new TransformGroup(taux);
+        t.addChild(modelo.getSceneGroup());
         
-        return transformGroup;
+        target.addChild(t);
     }    
 }
