@@ -13,7 +13,7 @@ class TheScene extends BranchGroup {
   private Canvas3D canvas;
   private Camara camLuna, camNave;
   
-  TheScene (Canvas3D canvas) { 
+  TheScene (Canvas3D canvas, Camara camLuna, Camara camNave) { 
     // Se crea la rama con una figura
     this.canvas= canvas;
     figure = createScene ();
@@ -41,8 +41,6 @@ class TheScene extends BranchGroup {
     Astro tierra= new Planeta("tierra", 1.5f, 50,0,0,10000,30000);
     
     Astro luna = new Satelite("luna",0.5f,7,0,0,5000,5000);
-    camLuna= new Camara("luna");
-    //cam.addCanvas(this.canvas);
     luna.addCamara(camLuna);
     ((Planeta)tierra).addSatelite((Satelite)luna);
     
@@ -167,6 +165,7 @@ class TheScene extends BranchGroup {
     TransformGroup tie_aux = new TransformGroup();
     tie_aux.setTransform( tg );
     
+    tie_fighter.addCamara(camNave);
     tie_aux.addChild(tie_fighter);
     bg.addChild( tie_aux );
             // END TEST

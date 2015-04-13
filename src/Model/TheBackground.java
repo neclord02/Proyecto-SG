@@ -12,7 +12,7 @@ import javax.vecmath.Point3d;
 
 class TheBackground extends BranchGroup {
   TheBackground () {
-    
+    this.setPickable(false);
     // Se crea el objeto para el fondo y 
     //     se le asigna un área de influencia
     Background background = new Background ();

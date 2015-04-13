@@ -24,6 +24,7 @@ public class TheUniverse extends BranchGroup{
   private final TheLights lights;
   private final TheScene scene;
   private Camara camara;
+  private View view;
 
   // ******* Constructor
   
@@ -40,8 +41,12 @@ public class TheUniverse extends BranchGroup{
     root.addChild(lights);
     
     // Se crea y se añade la escena al universo
-    scene = new TheScene (canvas2); 
-    scene.setcanvas(canvas2);
+    
+    Camara camLuna= new Camara("luna");
+    Camara camNave= new Camara("nave");
+    
+    scene = new TheScene (canvas2, camLuna, camNave); 
+    //scene.setcanvas(canvas2);
     scene.setPickable(true);
     root.addChild(scene);
     
@@ -51,6 +56,8 @@ public class TheUniverse extends BranchGroup{
     //Añadimos la cámara en perspectiva
     camara= new Camara(canvas2, "planta");
     universe.getLocale().addBranchGraph(camara);
+    universe.getLocale().addBranchGraph(camLuna);
+    universe.getLocale().addBranchGraph(camNave);
     //universe.getViewingPlatform().getViewPlatform()
     //camara.eliminarCanvas();
     //universe.getLocale().replaceBranchGraph(camara, new Camara(canvas2, "perspectiva"));
@@ -60,7 +67,7 @@ public class TheUniverse extends BranchGroup{
     pick.setStatus(scene);
     scene.addChild(pick);
     
-    ProcesaTeclado teclado = new ProcesaTeclado( canvas, canvas2 );
+    ProcesaTeclado teclado = new ProcesaTeclado( canvas, view, camLuna, camNave );
     teclado.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 1000.0));
     root.addChild(teclado);
     
@@ -94,6 +101,7 @@ public class TheUniverse extends BranchGroup{
         View view = viewer.getView();
         view.setFieldOfView(Math.toRadians(45));
         view.setBackClipDistance(150.0);
+        
     
         // Se construye y devuelve el Universo con los parametros definidos
         return new SimpleUniverse (viewingPlatform, viewer);

@@ -19,8 +19,10 @@ import javax.vecmath.Quat4f;
 public class Nave extends BranchGroup{
     
     private final String name;
+    private TransformGroup target;
     private Scene modelo;
     Nave(String name, String path){
+        this.setPickable(false);
         this.name = name;
         cargar_objeto(path);
     }
@@ -38,7 +40,6 @@ public class Nave extends BranchGroup{
         translate();
     }
     
-    // Probablemente deberiamos hacer una clase "Transformaciones"
     public void translate(){
         /*
         Alpha alphaNave = new Alpha( -1, Alpha.INCREASING_ENABLE, 0,0,6000,0,0,0,0,0 );
@@ -50,9 +51,8 @@ public class Nave extends BranchGroup{
         // Mismo hasta 0
                 */
         
-        Alpha alphaNave = new Alpha( -1, Alpha.INCREASING_ENABLE, 0,0,6000,0,0,0,0,0 );//
-        //Alpha alphaNave = new Alpha( -1,10000 );
-        TransformGroup target = new TransformGroup();
+        Alpha alphaNave = new Alpha( -1, Alpha.INCREASING_ENABLE, 0,0,6000,0,0,0,0,0 );
+        target = new TransformGroup();
         Transform3D axisOfRotPos = new Transform3D();
         float[] alphas = {0.0f,0.125f, 0.25f,0.375f, 0.50f,0.625f, 0.75f,0.875f, 1.0f};
         Quat4f[] quats = new Quat4f[9];
@@ -100,5 +100,9 @@ public class Nave extends BranchGroup{
         t.addChild(modelo.getSceneGroup());
         
         target.addChild(t);
-    }    
+    }  
+    
+    public void addCamara(Camara camNave){
+        target.addChild(camNave);
+    }
 }

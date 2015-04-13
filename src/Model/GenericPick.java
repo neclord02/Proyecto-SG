@@ -13,10 +13,7 @@ import javax.media.j3d.TransformGroup;
 import javax.media.j3d.WakeupCondition;
 import javax.media.j3d.WakeupOnAWTEvent;
 
-/**
- *
- * @author Vicente
- */
+
 public class GenericPick extends Behavior{
     private final WakeupCondition condition = new WakeupOnAWTEvent(MouseEvent.MOUSE_CLICKED );
     private PickCanvas pickCanvas1, pickCanvas2;
@@ -25,8 +22,6 @@ public class GenericPick extends Behavior{
     public GenericPick (Canvas3D aCanvas, Canvas3D aCanvas2) {
         canvas = aCanvas;
         canvas2= aCanvas2;
-        //condition = new WakeupOnAWTEvent( MouseEvent.MOUSE_CLICKED );
-       // status = AppStatus.Nothing;
     }
     
     public void setStatus(BranchGroup bg){

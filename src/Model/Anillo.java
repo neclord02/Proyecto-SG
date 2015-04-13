@@ -17,6 +17,7 @@ public class Anillo extends Shape3D{
     public Anillo( float rad1, float rad2, int res1, int res2, Appearance app ){
         
         this.bg = new BranchGroup();
+        this.bg.setPickable(false);
         
         ArrayList<Point3f> vertex = new ArrayList<>();
         ArrayList<Integer> index = new ArrayList<>();
