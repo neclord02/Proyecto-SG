@@ -8,16 +8,13 @@ import java.io.FileNotFoundException;
 import javax.media.j3d.Alpha;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
-import javax.media.j3d.PositionPathInterpolator;
 import javax.media.j3d.RotPosPathInterpolator;
-import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.AxisAngle4f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Point3f;
 import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
 
 public class Nave extends BranchGroup{
     
@@ -79,7 +76,8 @@ public class Nave extends BranchGroup{
         return transformGroup;*/
         //BranchGroup objRoot = new BranchGroup();
 
-        Alpha alphaNave = new Alpha( -1, Alpha.INCREASING_ENABLE, 0,0,6000,0,0,0,0,0 );//new Alpha( -1,10000 );
+        Alpha alphaNave = new Alpha( -1, Alpha.INCREASING_ENABLE, 0,0,6000,0,0,0,0,0 );//
+        //Alpha alphaNave = new Alpha( -1,10000 );
         TransformGroup target = new TransformGroup();
         Transform3D axisOfRotPos = new Transform3D();
         float[] alphas = {0.0f, 0.25f, 0.50f, 0.75f, 1.0f};
@@ -87,16 +85,18 @@ public class Nave extends BranchGroup{
         Point3f[] positions = new Point3f[5];
 
         target.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-
-        //AxisAngle4f axis = new AxisAngle4f(0.0f,(float)Math.toRadians(90),0.0f,0.0f);
-        //axisOfRotPos.set(axis);
-
-        quats[0] = new Quat4f(0.0f, 1.0f, 0.0f, 0.0f);
-        quats[1] = new Quat4f(0.0f, 1.0f, 0.0f, 0.0f);
-        quats[2] = new Quat4f(0.0f, 1.0f, 0.0f, 0.0f);
-        quats[3] = new Quat4f(0.0f, 0.0f, 0.0f, 0.0f);
-        quats[4] = quats[0];
-
+        
+        for( int i = 0;i<5;i++){
+        
+            quats[i] = new Quat4f();
+        
+        }
+        quats[0].set( new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(270)));
+        quats[1].set( new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(180)));
+        quats[2].set( new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(90)));
+        quats[3].set( new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(0)));
+        quats[4].set( new AxisAngle4f(0.0f, 1.0f, 0.0f, (float) Math.toRadians(270)));
+        
         positions[0]= new Point3f( -20.0f,  0.0f, 20.0f);
         positions[1]= new Point3f( -20.0f, 0.0f, -20.0f);
         positions[2]= new Point3f( 20.0f,  0.0f, -20.0f);

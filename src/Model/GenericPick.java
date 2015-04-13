@@ -1,11 +1,8 @@
 package Model;
 
 import com.sun.j3d.utils.pickfast.PickCanvas;
-import com.sun.j3d.utils.picking.PickResult;
 import java.awt.AWTEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Enumeration;
 import javax.media.j3d.Behavior;
 import javax.media.j3d.BranchGroup;
@@ -14,9 +11,7 @@ import javax.media.j3d.PickInfo;
 import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.WakeupCondition;
-import javax.media.j3d.WakeupCriterion;
 import javax.media.j3d.WakeupOnAWTEvent;
-import javax.media.j3d.WakeupOr;
 
 /**
  *
