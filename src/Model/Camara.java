@@ -16,10 +16,6 @@ import javax.media.j3d.ViewPlatform;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
-/**
- *
- * @author Vicente
- */
 public class Camara extends BranchGroup{
     private Transform3D transform3d;
     private TransformGroup transformgroup;

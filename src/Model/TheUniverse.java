@@ -60,6 +60,10 @@ public class TheUniverse extends BranchGroup{
     pick.setStatus(scene);
     scene.addChild(pick);
     
+    ProcesaTeclado teclado = new ProcesaTeclado( canvas, canvas2 );
+    teclado.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 1000.0));
+    root.addChild(teclado);
+    
     //this.addChild(root);
     // Se optimiza la escena y se cuelga del universo
     root.compile();
@@ -118,4 +122,11 @@ public class TheUniverse extends BranchGroup{
   public void setRotationOnOff (boolean onOff) {
     //scene.setRotationOnOff(onOff);
   }
+  
+  public void deleteCanvas(){
+  
+      
+  
+  }
+  
 }

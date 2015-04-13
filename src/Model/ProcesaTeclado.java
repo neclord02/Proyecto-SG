@@ -8,10 +8,13 @@ import javax.media.j3d.Canvas3D;
 import javax.media.j3d.WakeupOnAWTEvent;
 
 public class ProcesaTeclado extends Behavior {
-    private Canvas3D canvas;
+    private Canvas3D canvas,canvas2;
     private WakeupOnAWTEvent condition;
     
-    public ProcesaTeclado(){
+    public ProcesaTeclado( Canvas3D aCanvas, Canvas3D aCanvas2 ){
+        
+        canvas = aCanvas;
+        canvas2= aCanvas2;
         this.condition = new WakeupOnAWTEvent(KeyEvent.KEY_PRESSED);
         
     }
@@ -30,8 +33,12 @@ public class ProcesaTeclado extends Behavior {
         
         switch(tecla.getKeyChar()){
             case 'l':
-            //case 'L':
                 
+                System.out.println("ok");
+                break;
+            case 'L':
+            //case 'L':
+                System.out.println("ok");
                 break;
             case 'p':
                 
