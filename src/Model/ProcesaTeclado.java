@@ -40,7 +40,6 @@ public class ProcesaTeclado extends Behavior {
         switch(tecla.getKeyChar()){
             case 'l':
                 if(activa[0]){
-                    //System.out.println(view.numCanvas3Ds());
                     view.removeAllCanvas3Ds();
                     activa[0]=false;
                 }

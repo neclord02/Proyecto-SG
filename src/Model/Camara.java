@@ -86,6 +86,7 @@ public class Camara extends BranchGroup{
                 view.attachViewPlatform(vp);
                 break;
         }
+        this.addChild(transformgroup);
     }
     
     public void eliminarCanvas(){

@@ -8,6 +8,7 @@ import com.sun.j3d.utils.universe.ViewingPlatform;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
+import javax.media.j3d.GraphStructureChangeListener;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.View;
@@ -56,8 +57,8 @@ public class TheUniverse extends BranchGroup{
     //Añadimos la cámara en perspectiva
     camara= new Camara(canvas2, "planta");
     universe.getLocale().addBranchGraph(camara);
-    universe.getLocale().addBranchGraph(camLuna);
-    universe.getLocale().addBranchGraph(camNave);
+    //universe.getLocale().addBranchGraph(camLuna);
+    //universe.getLocale().addBranchGraph(camNave);
     //universe.getViewingPlatform().getViewPlatform()
     //camara.eliminarCanvas();
     //universe.getLocale().replaceBranchGraph(camara, new Camara(canvas2, "perspectiva"));
