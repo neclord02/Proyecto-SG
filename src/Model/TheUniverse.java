@@ -98,7 +98,7 @@ public class TheUniverse extends BranchGroup{
         
         // Se establece el angulo de vision a 45 grados y el plano de recorte trasero
         Viewer viewer = new Viewer (canvas);
-        View view = viewer.getView();
+        view = viewer.getView();
         view.setFieldOfView(Math.toRadians(45));
         view.setBackClipDistance(150.0);
         

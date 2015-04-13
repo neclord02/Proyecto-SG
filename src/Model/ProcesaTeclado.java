@@ -40,16 +40,18 @@ public class ProcesaTeclado extends Behavior {
         switch(tecla.getKeyChar()){
             case 'l':
                 if(activa[0]){
-                    System.out.println(view.numCanvas3Ds());
-                    //view.removeAllCanvas3Ds();
+                    //System.out.println(view.numCanvas3Ds());
+                    view.removeAllCanvas3Ds();
                     activa[0]=false;
                 }
                 else if(activa[2]){
                     camNave.eliminarCanvas();
                     activa[2]=false;
                 }
-                activa[1]= true;
-                camLuna.addCanvas(canvas);
+                if(!activa[1]){
+                    activa[1]= true;
+                    camLuna.addCanvas(canvas);
+                }
                 
                 System.out.println("ok-Luna ;)");
                 break;
@@ -66,8 +68,11 @@ public class ProcesaTeclado extends Behavior {
                     camNave.eliminarCanvas();
                     activa[2]=false;
                 }
-                activa[0]= true;
-                view.setCanvas3D(canvas, ALLOW_BOUNDS_READ);
+                
+                if(!activa[0]){
+                    activa[0]= true;
+                    view.setCanvas3D(canvas, 1);
+                }
                 
                 System.out.println("ok-Perspectiva ;)");
                 break;
@@ -80,8 +85,10 @@ public class ProcesaTeclado extends Behavior {
                     camNave.eliminarCanvas();
                     activa[1]=false;
                 }
-                activa[2]= true;
-                camNave.addCanvas(canvas);
+                if(!activa[2]){
+                    activa[2]= true;
+                    camNave.addCanvas(canvas);
+                }
                 
                 System.out.println("ok-Nave ;)");
                 break;
