@@ -14,7 +14,7 @@ public class Anillo extends Shape3D{
     private Anillo anillo2;
     private Appearance textura;
     
-    public Anillo( float rad1, float rad2, int res1, int res2, Appearance app ){
+    public Anillo( float rad1, float rad2, int res1, int res2 ){
         
         this.bg = new BranchGroup();
         this.bg.setPickable(false);
@@ -118,7 +118,6 @@ public class Anillo extends Shape3D{
         quads.setCoordinateIndices(0,indices );
         
         this.setGeometry( quads );
-        //this.setAppearance(app);
         this.setTexture();
         
         this.bg.addChild(this);

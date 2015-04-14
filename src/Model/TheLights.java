@@ -16,11 +16,4 @@ class TheLights extends BranchGroup {
     
   }
   
-  /// Este método es llamado desde la fachada
-  void setOnOff (int lightIndex, boolean onOff) {
-   /* if (lightIndex > 0 && lightIndex < this.numChildren()) {
-      ((Light) this.getChild (lightIndex)).setEnable(onOff);
-    }  */ 
-  }
-  
 }

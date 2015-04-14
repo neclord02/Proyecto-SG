@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import Model.Camara;
@@ -10,19 +5,13 @@ import Model.TheUniverse;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.View;
 
-/**
- *
- * @author Vicente
- */
 public class ControlCamaras extends javax.swing.JFrame {
     private TheUniverse universe;
     private Canvas3D canvas;
     private View view;
     private Camara camLuna, camNave;
     private boolean[] activa;
-    /**
-     * Creates new form ControlCamaras
-     */
+
     public ControlCamaras(TheUniverse universe, Camara camLuna, Camara camNave) {
         this.universe= universe;
         this.activa = new boolean[]{true, false, false};
@@ -108,8 +97,6 @@ public class ControlCamaras extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonPerspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPerspActionPerformed
-        for(int i=0; i<3; i++)
-            System.out.println("Activa " + i + ": " + activa[i]);
         
         if(activa[1]){
             camLuna.eliminarCanvas();
@@ -125,7 +112,6 @@ public class ControlCamaras extends javax.swing.JFrame {
             view.addCanvas3D(canvas);
         }
 
-        System.out.println("ok-Perspectiva ;)");
     }//GEN-LAST:event_ButtonPerspActionPerformed
 
     private void ButtonLunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLunaActionPerformed
@@ -142,7 +128,6 @@ public class ControlCamaras extends javax.swing.JFrame {
             camLuna.addCanvas(canvas);
         }
 
-        System.out.println("ok-Luna ;)");
     }//GEN-LAST:event_ButtonLunaActionPerformed
 
     private void ButtonNaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonNaveActionPerformed
@@ -159,7 +144,6 @@ public class ControlCamaras extends javax.swing.JFrame {
             camNave.addCanvas(canvas);
         }
 
-        System.out.println("ok-Nave ;)");
     }//GEN-LAST:event_ButtonNaveActionPerformed
 
     public void showWindow () {

@@ -1,12 +1,9 @@
 package Model;
 
 import javax.media.j3d.*;
-import javax.vecmath.Color3f;
 
 class TheScene extends BranchGroup {
-  /// La rama de donde cuelga la figura que se cambia
   private final BranchGroup figure;
-  /// El objeto que controla la rotación continua de la figura
   private RotationInterpolator rotator;
   private Nave nave;
   private Canvas3D canvas;
@@ -14,25 +11,17 @@ class TheScene extends BranchGroup {
   private View view;
   
   TheScene (View view, Canvas3D canvas, Camara camLuna, Camara camNave) { 
-    // Se crea la rama con una figura
     this.view= view;
     this.camLuna= camLuna;
     this.camNave= camNave;
     this.canvas= canvas;
     figure = createScene ();
-    // Se cuelga rotación de la escena
     this.addChild(figure);
   }
 
   private BranchGroup createScene () {
-    /*
-      1.- Iniciar -> creas los parametros del objeto
-        1.1.- -> Si tiene lunas, añadirselas
-      2.- Dibujar -> creas las transformaciones internas del objeto
-                    esto ya crea las transformaciones de las lunas tb
-      3.- Añadir al nodo padre
-      */
-     /* ----- PLANETAS ---- */ 
+
+      /* ----- PLANETAS ---- */ 
       
       //// SOL
     Astro sol= new Estrella("sol", 27.0f, 0,0,0,100000,0);
@@ -74,42 +63,13 @@ class TheScene extends BranchGroup {
     
        //// SATURNO
     
-    /* Apariencias anillos */
-    
-    Appearance ap = new Appearance();
-    Appearance ap2 = new Appearance();
-    Appearance ap3 = new Appearance();
-        // Rosa
-    ap.setMaterial(new Material (
-        new Color3f (0.20f, 0.20f, 0.20f),   // Color ambiental
-        new Color3f (1.00f, 0.0f, 1.00f),   // Color emisivo
-        new Color3f (0.49f, 0.34f, 0.00f),   // Color difuso
-        new Color3f (0.89f, 0.79f, 0.00f),   // Color especular
-        17.0f ));                            // Brillo
-        // Azul
-    ap2.setMaterial(new Material (
-        new Color3f (0.20f, 0.20f, 0.20f),   // Color ambiental
-        new Color3f (0.00f, 0.0f, 1.00f),   // Color emisivo
-        new Color3f (0.49f, 0.34f, 0.00f),   // Color difuso
-        new Color3f (0.89f, 0.79f, 0.00f),   // Color especular
-        17.0f ));                            // Brillo
-        // Rojo
-    ap3.setMaterial(new Material (
-        new Color3f (0.20f, 0.20f, 0.20f),   // Color ambiental
-        new Color3f (1.00f, 0.0f, 0.0f),   // Color emisivo
-        new Color3f (0.49f, 0.34f, 0.00f),   // Color difuso
-        new Color3f (0.89f, 0.79f, 0.00f),   // Color especular
-        17.0f ));                            // Brillo
-    
-    /* fin apariencias anillos */
-    
     Astro saturno= new Planeta("saturno", 9.0f, 150,0,0,15000,10000);
     
     /* Anillos */
     
-    Anillo anillo = new Anillo(33.0f,1.0f,50,40,ap);
-    Anillo anillo2 = new Anillo(27.0f,1.0f,50,40,ap2);
-    Anillo anillo3 = new Anillo(21.0f,1.0f,50,40,ap3);
+    Anillo anillo = new Anillo(33.0f,1.0f,50,40);
+    Anillo anillo2 = new Anillo(27.0f,1.0f,50,40);
+    Anillo anillo3 = new Anillo(21.0f,1.0f,50,40);
     
     ((Planeta)saturno).addAnillo(anillo);
     ((Planeta)saturno).addAnillo(anillo2);
@@ -168,25 +128,8 @@ class TheScene extends BranchGroup {
     tie_aux.addChild(tie_fighter);
     bg.addChild( tie_aux );
     
-    //view.removeAllCanvas3Ds();
-    //camLuna.addCanvas(canvas);
-    
-            // END TEST
-    // Nave 2
-    //Nave jet = new Nave("jet","models\\FA-22_Raptor\\FA-22_Raptor.obj" );
-    //bg.addChild( jet.getBranchGroup());
-    // Nave 3
-    //Nave space_ship = new Nave("space_ship","models\\naveEspacial\\naveEspacial.obj" ));
-    //bg.addChild( space_ship.getBranchGroup());
-    
     /* ----- FIN NAVES ---- */
     
-    /* ----- INIT PICK ---- */
-   /* GenericPick pick= new GenericPick(canvas);
-    pick.setStatus(bg);
-    
-    bg.addChild(pick);
-    */
     return bg;
   }
   

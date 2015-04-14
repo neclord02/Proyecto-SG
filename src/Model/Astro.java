@@ -98,8 +98,8 @@ public abstract class Astro extends BranchGroup{
         TransformGroup transform = new TransformGroup ();
         transform.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         Transform3D yAxis = new Transform3D ();
-        Alpha value = new Alpha (-1, Alpha.INCREASING_ENABLE, 0, 0, 
-                rot, 0, 0, 0, 0, 0);
+        Alpha value = new Alpha (-1, Alpha.INCREASING_ENABLE, 0, 0,rot, 0, 0, 0, 0, 0);
+        
         auxInterp = new RotationInterpolator (value, transform, yAxis,
             0.0f, (float) Math.PI*2.0f);
         auxInterp.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0 ), 1000.0));

@@ -11,7 +11,6 @@ import javax.media.j3d.View;
 public class SGP1 {
 
     public static void main(String[] args) {
-        // Se obtiene la configuración gráfica del sistema y se crea el Canvas3D que va a mostrar la imagen
         Canvas3D canvas = new Canvas3D (SimpleUniverse.getPreferredConfiguration());
         canvas.setSize(600, 600);
 
@@ -20,8 +19,8 @@ public class SGP1 {
 
         Camara camLuna= new Camara("luna");
         Camara camNave= new Camara("nave");
-        View view = null;
-        TheUniverse universe = new TheUniverse (canvas, canvas2,  camLuna, camNave, view);
+        
+        TheUniverse universe = new TheUniverse (canvas, canvas2,  camLuna, camNave);
  
         ControlCamaras control= new ControlCamaras(universe, camLuna, camNave);
         

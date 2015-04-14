@@ -59,24 +59,22 @@ public class GenericPick extends Behavior{
             TransformGroup aux= (TransformGroup) pi.getSceneGraphPath().getNode(0);
             RotationInterpolator rot= (RotationInterpolator)aux.getChild(0);
 
-            if(rot.getEnable()){
-                rot.setEnable(false);
+            if(!rot.getAlpha().isPaused()){
+                rot.getAlpha().pause();
             }
-            else if(!rot.getEnable()){
-                rot.setEnable(true);
-            }           
+            else if(rot.getAlpha().isPaused()){
+                rot.getAlpha().resume();
+            }
         }
         else if(pi2!=null){
             TransformGroup aux2= (TransformGroup) pi2.getSceneGraphPath().getNode(0);
             RotationInterpolator rot2= (RotationInterpolator)aux2.getChild(0);
             
-            if(rot2.getEnable()){
-                rot2.setEnable(false);
-                System.out.println("OFF");
+            if(!rot2.getAlpha().isPaused()){
+                rot2.getAlpha().pause();
             }
-            else if(!rot2.getEnable()){
-                rot2.setEnable(true);
-                System.out.println("ON");
+            else if(rot2.getAlpha().isPaused()){
+                rot2.getAlpha().resume();
             }
         }
         

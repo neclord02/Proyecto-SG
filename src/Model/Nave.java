@@ -28,7 +28,6 @@ public class Nave extends BranchGroup{
     }
     
     public void cargar_objeto( String path ){
-        // Cargar objeto y texturas
         modelo = null; 
         ObjectFile archivo = new ObjectFile (ObjectFile.RESIZE | ObjectFile.STRIPIFY | ObjectFile.TRIANGULATE);
         try {
@@ -41,15 +40,6 @@ public class Nave extends BranchGroup{
     }
     
     public void translate(){
-        /*
-        Alpha alphaNave = new Alpha( -1, Alpha.INCREASING_ENABLE, 0,0,6000,0,0,0,0,0 );
-        // Nada
-        // Reposo
-        // Lineal
-        // Deceleracion inicial
-        // Cuanto tiempo en MAX
-        // Mismo hasta 0
-                */
         
         Alpha alphaNave = new Alpha( -1, Alpha.INCREASING_ENABLE, 0,0,6000,0,0,0,0,0 );
         target = new TransformGroup();

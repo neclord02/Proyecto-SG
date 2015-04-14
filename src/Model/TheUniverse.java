@@ -14,10 +14,6 @@ import javax.media.j3d.View;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
-/**
- *
- * @author fvelasco
- */
 public class TheUniverse extends BranchGroup{
   // Atributos de relación
   private final TheBackground background;
@@ -29,9 +25,9 @@ public class TheUniverse extends BranchGroup{
 
   // ******* Constructor
   
-  public TheUniverse (Canvas3D canvas, Canvas3D canvas2, Camara camLuna, Camara camNave, View view) {
+  public TheUniverse (Canvas3D canvas, Canvas3D canvas2, Camara camLuna, Camara camNave) {
     this.canvas= canvas;
-    this.view= view;
+    this.view= new View();
     // Todo cuelga de un nodo raiz
     BranchGroup root = new BranchGroup();
     
@@ -54,13 +50,6 @@ public class TheUniverse extends BranchGroup{
     //Añadimos la cámara en planta
     camara= new Camara(canvas2, "planta");
     universe.getLocale().addBranchGraph(camara);
-    //universe.getLocale().addBranchGraph(camLuna);
-    //universe.getLocale().addBranchGraph(camNave);
-    
-    //Procesamiento del teclado
-    /*ProcesaTeclado teclado = new ProcesaTeclado( canvas, view, camLuna, camNave );
-    teclado.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 1000.0));
-    root.addChild(teclado);*/
     
     // Se crea y se añade la escena al universo
     scene = new TheScene ( view ,canvas, camLuna, camNave); 
@@ -73,7 +62,6 @@ public class TheUniverse extends BranchGroup{
     pick.setStatus(scene);
     scene.addChild(pick);
     
-    //this.addChild(root);
     // Se optimiza la escena y se cuelga del universo
     root.compile();
     universe.addBranchGraph(root);
