@@ -14,7 +14,7 @@ public abstract class Astro extends BranchGroup{
     private Appearance textura;
     private String nombre;
     private final Sphere esfera;
-    protected TransformGroup position;
+    protected TransformGroup position, inner_rot;
     private RotationInterpolator rotator_int;
     private RotationInterpolator rotator_ext;
     private final int inner_rot_speed;
@@ -44,7 +44,7 @@ public abstract class Astro extends BranchGroup{
         if(!this.nombre.equals("sol")){
             TransformGroup outer_rot = createRotation(outer_rot_speed,true);
             position = translate( new Vector3f(this.posX,this.posY,this.posZ) );
-            TransformGroup inner_rot = new TransformGroup();
+            inner_rot = new TransformGroup();
             inner_rot= createRotation(inner_rot_speed, false);
             inner_rot.setCapability(Node.ENABLE_PICK_REPORTING);
 
@@ -118,6 +118,6 @@ public abstract class Astro extends BranchGroup{
     }
     
     public void addCamara(Camara cam){
-        position.addChild(cam);
+        inner_rot.addChild(cam);
     }
 }

@@ -2,7 +2,6 @@ package Model;
 
 import javax.media.j3d.*;
 import javax.vecmath.Color3f;
-import javax.vecmath.Point3d;
 
 class TheScene extends BranchGroup {
   /// La rama de donde cuelga la figura que se cambia
@@ -12,17 +11,17 @@ class TheScene extends BranchGroup {
   private Nave nave;
   private Canvas3D canvas;
   private Camara camLuna, camNave;
+  private View view;
   
-  TheScene (Canvas3D canvas, Camara camLuna, Camara camNave) { 
+  TheScene (View view, Canvas3D canvas, Camara camLuna, Camara camNave) { 
     // Se crea la rama con una figura
+    this.view= view;
+    this.camLuna= camLuna;
+    this.camNave= camNave;
     this.canvas= canvas;
     figure = createScene ();
     // Se cuelga rotación de la escena
     this.addChild(figure);
-  }
-  
-  public void setcanvas(Canvas3D ca){
-      canvas= ca;
   }
 
   private BranchGroup createScene () {
@@ -168,6 +167,10 @@ class TheScene extends BranchGroup {
     tie_fighter.addCamara(camNave);
     tie_aux.addChild(tie_fighter);
     bg.addChild( tie_aux );
+    
+    //view.removeAllCanvas3Ds();
+    //camLuna.addCanvas(canvas);
+    
             // END TEST
     // Nave 2
     //Nave jet = new Nave("jet","models\\FA-22_Raptor\\FA-22_Raptor.obj" );

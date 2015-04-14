@@ -8,7 +8,6 @@ import com.sun.j3d.utils.universe.ViewingPlatform;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
-import javax.media.j3d.GraphStructureChangeListener;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.View;
@@ -24,12 +23,15 @@ public class TheUniverse extends BranchGroup{
   private final TheBackground background;
   private final TheLights lights;
   private final TheScene scene;
-  private Camara camara;
+  private Camara camara, camLuna, camNave;
   private View view;
+  private Canvas3D canvas;
 
   // ******* Constructor
   
-  public TheUniverse (Canvas3D canvas, Canvas3D canvas2) {
+  public TheUniverse (Canvas3D canvas, Canvas3D canvas2, Camara camLuna, Camara camNave, View view) {
+    this.canvas= canvas;
+    this.view= view;
     // Todo cuelga de un nodo raiz
     BranchGroup root = new BranchGroup();
     
@@ -41,36 +43,35 @@ public class TheUniverse extends BranchGroup{
     lights = new TheLights ();
     root.addChild(lights);
     
-    // Se crea y se añade la escena al universo
+    //Camaras de la luna y la nave
+    this.camLuna= camLuna;
+    this.camNave= camNave;
     
-    Camara camLuna= new Camara("luna");
-    Camara camNave= new Camara("nave");
-    
-    scene = new TheScene (canvas2, camLuna, camNave); 
-    //scene.setcanvas(canvas2);
-    scene.setPickable(true);
-    root.addChild(scene);
     
     // Se crea el universo. La parte de la vista
     SimpleUniverse universe = createUniverse (canvas);
     
-    //Añadimos la cámara en perspectiva
+    //Añadimos la cámara en planta
     camara= new Camara(canvas2, "planta");
     universe.getLocale().addBranchGraph(camara);
     //universe.getLocale().addBranchGraph(camLuna);
     //universe.getLocale().addBranchGraph(camNave);
-    //universe.getViewingPlatform().getViewPlatform()
-    //camara.eliminarCanvas();
-    //universe.getLocale().replaceBranchGraph(camara, new Camara(canvas2, "perspectiva"));
-    // ----
+    
+    //Procesamiento del teclado
+    /*ProcesaTeclado teclado = new ProcesaTeclado( canvas, view, camLuna, camNave );
+    teclado.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 1000.0));
+    root.addChild(teclado);*/
+    
+    // Se crea y se añade la escena al universo
+    scene = new TheScene ( view ,canvas, camLuna, camNave); 
+    scene.setPickable(true);
+    root.addChild(scene);
+    
+    //Procesamiento de Pick
     GenericPick pick= new GenericPick(canvas, canvas2);
     pick.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 1000.0));
     pick.setStatus(scene);
     scene.addChild(pick);
-    
-    ProcesaTeclado teclado = new ProcesaTeclado( canvas, view, camLuna, camNave );
-    teclado.setSchedulingBounds(new BoundingSphere (new Point3d (0.0, 0.0, 0.0), 1000.0));
-    root.addChild(teclado);
     
     //this.addChild(root);
     // Se optimiza la escena y se cuelga del universo
@@ -110,32 +111,15 @@ public class TheUniverse extends BranchGroup{
   
   // ******* Public
   
+  public View getView(){
+      return view;
+  }
+  
+  public Canvas3D getCanvas(){
+      return canvas;
+  }
+  
   public void closeApp (int code) {
     System.exit (code);
-  }
-  
-  // Esta clase es la fachada del modelo. 
-  // Recibe todas las solicitudes de actuación y las redirige a los objetos que corresponden
-  /*public void setAppearance (Appearances ap) {
-    scene.setAppearance(ap);
-  }*/
-  
-  public void setLightsOnOff (int lightIndex, boolean onOff) {
-    lights.setOnOff(lightIndex, onOff);
-  }
-  
-  /*public void setPrimitive (PrimitiveBranches pr) {
-    scene.setPrimitive(pr);
-  }
-  */
-  public void setRotationOnOff (boolean onOff) {
-    //scene.setRotationOnOff(onOff);
-  }
-  
-  public void deleteCanvas(){
-  
-      
-  
-  }
-  
+  } 
 }
