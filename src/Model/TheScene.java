@@ -5,7 +5,7 @@ import javax.media.j3d.*;
 class TheScene extends BranchGroup {
   private final BranchGroup figure;
   private Nave nave;
-  private Camara camLuna, camNave, camNave3person;
+  private final Camara camLuna, camNave, camNave3person;
   
   TheScene (Camara camLuna, Camara camNave, Camara camNave3person) { 
     this.camLuna= camLuna;
@@ -111,7 +111,7 @@ class TheScene extends BranchGroup {
     
     /* ----- NAVES ---- */
     // Nave 1
-    Nave tie_fighter = new Nave("tie_fighter","models\\E-TIE-I\\E-TIE-I.obj" );
+    Nave tie_fighter = new Nave("tie_fighter","models/E-TIE-I/E-TIE-I.obj" );
             /// TEST ESCALE DE LA NAVE
     Transform3D tg = new Transform3D();
     tg.setScale( 2.0f );
