@@ -94,8 +94,4 @@ public class Camara extends BranchGroup{
         this.canvas= canvas;
         view.addCanvas3D(this.canvas);
     }
-    
-    public ViewPlatform getViewPlatform(){
-        return vp;
-    }
 }
