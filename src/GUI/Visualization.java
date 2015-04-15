@@ -6,7 +6,6 @@ import java.awt.Container;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.media.j3d.Canvas3D;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 public class Visualization extends JFrame {

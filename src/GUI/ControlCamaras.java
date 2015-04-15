@@ -6,11 +6,11 @@ import javax.media.j3d.Canvas3D;
 import javax.media.j3d.View;
 
 public class ControlCamaras extends javax.swing.JFrame {
-    private TheUniverse universe;
-    private Canvas3D canvas;
-    private View view;
-    private Camara camLuna, camNave;
-    private boolean[] activa;
+    private final TheUniverse universe;
+    private final Canvas3D canvas;
+    private final View view;
+    private final Camara camLuna, camNave;
+    private final boolean[] activa;
 
     public ControlCamaras(TheUniverse universe, Camara camLuna, Camara camNave) {
         this.universe= universe;
