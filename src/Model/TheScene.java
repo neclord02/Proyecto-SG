@@ -5,11 +5,12 @@ import javax.media.j3d.*;
 class TheScene extends BranchGroup {
   private final BranchGroup figure;
   private Nave nave;
-  private Camara camLuna, camNave;
+  private Camara camLuna, camNave, camNave3person;
   
-  TheScene (Camara camLuna, Camara camNave) { 
+  TheScene (Camara camLuna, Camara camNave, Camara camNave3person) { 
     this.camLuna= camLuna;
     this.camNave= camNave;
+    this.camNave3person = camNave3person;
     figure = createScene ();
     this.addChild(figure);
   }
@@ -119,6 +120,7 @@ class TheScene extends BranchGroup {
     tie_aux.setTransform( tg );
     
     tie_fighter.addCamara(camNave);
+    tie_fighter.addCamara(camNave3person);
     tie_aux.addChild(tie_fighter);
     bg.addChild( tie_aux );
     

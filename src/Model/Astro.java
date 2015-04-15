@@ -126,6 +126,6 @@ public abstract class Astro extends BranchGroup{
     }
     
     public void addCamara(Camara cam){
-        inner_rot.addChild(cam);
+        position.addChild(cam);
     }
 }

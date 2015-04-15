@@ -25,7 +25,7 @@ public class TheUniverse extends BranchGroup{
 
   // ******* Constructor
   
-  public TheUniverse (Canvas3D canvas, Canvas3D canvas2, Camara camLuna, Camara camNave) {
+  public TheUniverse (Canvas3D canvas, Canvas3D canvas2, Camara camLuna, Camara camNave, Camara camNave3person) {
     this.canvas= canvas;
     this.view= new View();
     // Todo cuelga de un nodo raiz
@@ -47,7 +47,7 @@ public class TheUniverse extends BranchGroup{
     universe.getLocale().addBranchGraph(camara);
     
     // Se crea y se añade la escena al universo
-    scene = new TheScene (camLuna, camNave); 
+    scene = new TheScene (camLuna, camNave, camNave3person); 
     scene.setPickable(true);
     root.addChild(scene);
     

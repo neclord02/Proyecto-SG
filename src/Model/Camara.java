@@ -42,14 +42,17 @@ public class Camara extends BranchGroup{
         addChild(transformgroup);
     }
     
-    public Camara(String tipo){
+    public Camara(String tipo,String modo){
         transform3d= new Transform3D();
         view= new View();
         vp= new ViewPlatform();
         
         switch(tipo){
             case "luna":
-                transform3d.lookAt(new Point3d(0.1,0.1,0.1), new Point3d(0,0,1), new Vector3d(0,1,0)); //new Point3d(120,60,120)
+                if( modo == "pov" )
+                    transform3d.lookAt(new Point3d(0.1,0.1,0.1), new Point3d(-1.75,0,0), new Vector3d(0,1,0));
+                else
+                    transform3d.lookAt(new Point3d(0,0.1,-10), new Point3d(0,0,1), new Vector3d(0,1,0));
                 transform3d.invert();
                 transformgroup= new TransformGroup(transform3d);
                 transformgroup.addChild(vp);
@@ -63,7 +66,10 @@ public class Camara extends BranchGroup{
                 view.attachViewPlatform(vp);
                 break;
             case "nave":
-                transform3d.lookAt(new Point3d(0.1,0.1,0.1), new Point3d(0,0,1), new Vector3d(0,1,0)); //new Point3d(120,60,120)
+                if( modo == "pov" )
+                    transform3d.lookAt(new Point3d(0.1,0.1,0.1), new Point3d(0,0,1), new Vector3d(0,1,0));
+                else
+                    transform3d.lookAt(new Point3d(4,4,-10), new Point3d(0,0,1), new Vector3d(0,1,0));
                 transform3d.invert();
                 transformgroup= new TransformGroup(transform3d);
                 transformgroup.addChild(vp);

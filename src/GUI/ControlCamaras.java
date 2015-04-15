@@ -9,18 +9,20 @@ public class ControlCamaras extends javax.swing.JFrame {
     private final TheUniverse universe;
     private final Canvas3D canvas;
     private final View view;
-    private final Camara camLuna, camNave;
+    private final Camara camLuna, camNave, camNave3person;
     private final boolean[] activa;
 
-    public ControlCamaras(TheUniverse universe, Camara camLuna, Camara camNave) {
+    public ControlCamaras(TheUniverse universe, Camara camLuna, Camara camNave, Camara camNave3person) {
         this.universe= universe;
-        this.activa = new boolean[]{true, false, false};
+        this.activa = new boolean[]{true, false, false,false};
         this.view= universe.getView();
         this.camLuna= camLuna;
         this.camNave= camNave;
         this.canvas= universe.getCanvas();
+        this.camNave3person = camNave3person;
         
         initComponents();
+        this.setLocation(250, 500);
         showWindow();
     }
 
@@ -37,6 +39,7 @@ public class ControlCamaras extends javax.swing.JFrame {
         ButtonPersp = new javax.swing.JButton();
         ButtonLuna = new javax.swing.JButton();
         ButtonNave = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,10 +59,17 @@ public class ControlCamaras extends javax.swing.JFrame {
             }
         });
 
-        ButtonNave.setText("Nave");
+        ButtonNave.setText("Nave pov");
         ButtonNave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonNaveActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Nave 3º");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -71,14 +81,16 @@ public class ControlCamaras extends javax.swing.JFrame {
                 .addGap(144, 144, 144)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ButtonPersp)
                 .addGap(63, 63, 63)
                 .addComponent(ButtonLuna)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addComponent(ButtonNave)
-                .addGap(56, 56, 56))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ButtonNave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +102,9 @@ public class ControlCamaras extends javax.swing.JFrame {
                     .addComponent(ButtonPersp)
                     .addComponent(ButtonLuna)
                     .addComponent(ButtonNave))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
@@ -105,6 +119,10 @@ public class ControlCamaras extends javax.swing.JFrame {
         else if(activa[2]){
             camNave.eliminarCanvas();
             activa[2]=false;
+        }
+        else if(activa[3]){
+            camNave3person.eliminarCanvas();
+            activa[3]=false;
         }
 
         if(!activa[0]){
@@ -123,6 +141,10 @@ public class ControlCamaras extends javax.swing.JFrame {
             camNave.eliminarCanvas();
             activa[2]=false;
         }
+        else if(activa[3]){
+            camNave3person.eliminarCanvas();
+            activa[3]=false;
+        }
         if(!activa[1]){
             activa[1]= true;
             camLuna.addCanvas(canvas);
@@ -139,12 +161,35 @@ public class ControlCamaras extends javax.swing.JFrame {
             camLuna.eliminarCanvas();
             activa[1]=false;
         }
+        else if(activa[3]){
+            camNave3person.eliminarCanvas();
+            activa[3]=false;
+        }
         if(!activa[2]){
             activa[2]= true;
             camNave.addCanvas(canvas);
         }
 
     }//GEN-LAST:event_ButtonNaveActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(activa[0]){
+            view.removeAllCanvas3Ds();
+            activa[0]=false;
+        }
+        else if(activa[1]){
+            camLuna.eliminarCanvas();
+            activa[1]=false;
+        }
+        else if(activa[2]){
+            camNave.eliminarCanvas();
+            activa[2]=false;
+        }
+        if(!activa[3]){
+            activa[3]= true;
+            camNave3person.addCanvas(canvas);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void showWindow () {
         setVisible (true);
@@ -158,6 +203,7 @@ public class ControlCamaras extends javax.swing.JFrame {
     private javax.swing.JButton ButtonLuna;
     private javax.swing.JButton ButtonNave;
     private javax.swing.JButton ButtonPersp;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
