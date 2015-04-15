@@ -6,7 +6,6 @@ import GUI.ControlCamaras;
 import Model.TheUniverse;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import javax.media.j3d.Canvas3D;
-import javax.media.j3d.View;
 
 public class SGP1 {
 

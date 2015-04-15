@@ -20,6 +20,7 @@ public abstract class Astro extends BranchGroup{
     private final int inner_rot_speed;
     private final int outer_rot_speed;
     
+    //Metodo para crear la apariencia del astro
     private void setAppeareance(String nombre){
         this.textura = new Appearance();
         Texture aTexture= new TextureLoader ("imgs/" + nombre +".jpg", null).getTexture();
@@ -40,6 +41,10 @@ public abstract class Astro extends BranchGroup{
         this.textura.setTexture(aTexture);
     }
     
+    //Metodo que crea el grafo de escena del astro. Si el astro es el sol,
+    //solo tendrá un nodo de rotación sobre si mismo, en el caso de ser otro elemento,
+    //presentará en orden descendiente: rotacion_exterio, traslacion, rotacion_interior y el
+    //objeto sphere.
     private void setGrafo(){
         if(!this.nombre.equals("sol")){
             TransformGroup outer_rot = createRotation(outer_rot_speed,true);
@@ -84,6 +89,7 @@ public abstract class Astro extends BranchGroup{
         setGrafo();
     }
     
+    //Metodo para crear la traslacion del astro
     private TransformGroup translate(Vector3f vector){       
         Transform3D transform3D = new Transform3D();
         transform3D.setTranslation(vector);
@@ -93,6 +99,8 @@ public abstract class Astro extends BranchGroup{
         return transformGroup;     
     }
     
+    //Metodo que dependiendo del tipoRot creará un nodo de rotacion sobre su eje
+    // o una rotacion exterior.
     private TransformGroup createRotation(int rot, boolean tipoRot){
         RotationInterpolator auxInterp;
         TransformGroup transform = new TransformGroup ();

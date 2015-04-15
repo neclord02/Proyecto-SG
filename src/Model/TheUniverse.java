@@ -19,9 +19,9 @@ public class TheUniverse extends BranchGroup{
   private final TheBackground background;
   private final TheLights lights;
   private final TheScene scene;
-  private Camara camara, camLuna, camNave;
+  private final Camara camara;
   private View view;
-  private Canvas3D canvas;
+  private final Canvas3D canvas;
 
   // ******* Constructor
   
@@ -39,20 +39,15 @@ public class TheUniverse extends BranchGroup{
     lights = new TheLights ();
     root.addChild(lights);
     
-    //Camaras de la luna y la nave
-    this.camLuna= camLuna;
-    this.camNave= camNave;
-    
-    
     // Se crea el universo. La parte de la vista
     SimpleUniverse universe = createUniverse (canvas);
     
     //Añadimos la cámara en planta
-    camara= new Camara(canvas2, "planta");
+    camara= new Camara(canvas2);
     universe.getLocale().addBranchGraph(camara);
     
     // Se crea y se añade la escena al universo
-    scene = new TheScene ( view ,canvas, camLuna, camNave); 
+    scene = new TheScene (camLuna, camNave); 
     scene.setPickable(true);
     root.addChild(scene);
     

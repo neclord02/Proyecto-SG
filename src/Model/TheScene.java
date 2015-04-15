@@ -4,23 +4,17 @@ import javax.media.j3d.*;
 
 class TheScene extends BranchGroup {
   private final BranchGroup figure;
-  private RotationInterpolator rotator;
   private Nave nave;
-  private Canvas3D canvas;
   private Camara camLuna, camNave;
-  private View view;
   
-  TheScene (View view, Canvas3D canvas, Camara camLuna, Camara camNave) { 
-    this.view= view;
+  TheScene (Camara camLuna, Camara camNave) { 
     this.camLuna= camLuna;
     this.camNave= camNave;
-    this.canvas= canvas;
     figure = createScene ();
     this.addChild(figure);
   }
 
   private BranchGroup createScene () {
-
       /* ----- PLANETAS ---- */ 
       
       //// SOL
@@ -132,12 +126,4 @@ class TheScene extends BranchGroup {
     
     return bg;
   }
-  
-  public Camara getCamaraLuna(){
-      return camLuna;
-  }
-   public Camara getCamaraNave(){
-      return camNave;
-  }
-  
 }

@@ -11,7 +11,7 @@ import javax.vecmath.Vector3f;
 public class Anillo extends Shape3D{
     
     private final BranchGroup bg;
-    private Anillo anillo2;
+    //private Anillo anillo2;
     private Appearance textura;
     
     public Anillo( float rad1, float rad2, int res1, int res2 ){
